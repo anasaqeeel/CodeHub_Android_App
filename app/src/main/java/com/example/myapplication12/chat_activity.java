@@ -1,24 +1,35 @@
 package com.example.myapplication12;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication12.adapters.ChatRecyclerAdapter;
 import com.example.myapplication12.models.UserModel;
+import com.example.myapplication12.models.chatMessageModel;
 import com.example.myapplication12.models.chatRoomModel;
 import com.example.myapplication12.utilities.androidutil;
 import com.example.myapplication12.utilities.firebaeUtil;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 
 public class chat_activity extends AppCompatActivity {
     UserModel otheruser;
+    ChatRecyclerAdapter adapter;
     chatRoomModel chatroommodel;
     String chatroomid;
 
@@ -52,9 +63,14 @@ public class chat_activity extends AppCompatActivity {
                 Toast.makeText(this, "Error: chatroomid is null.", Toast.LENGTH_LONG).show();
                 finish(); // Close the current activity and return to the previous one
             }
-        } else {
+        } else if(currentUserId==null) {
             // Handle the case where currentUserId or otherUserId is null
-            Toast.makeText(this, "Error: unable to get user information.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error: current to get user information.", Toast.LENGTH_LONG).show();
+            finish(); // Close the current activity and return to the previous one
+        }
+        else if(otherUserId==null) {
+            // Handle the case where currentUserId or otherUserId is null
+            Toast.makeText(this, "Error:other user unable to get user information.", Toast.LENGTH_LONG).show();
             finish(); // Close the current activity and return to the previous one
         }
 
@@ -68,16 +84,63 @@ public class chat_activity extends AppCompatActivity {
             onBackPressed(); // Corrected to call onBackPressed method
         });
         otherusername.setText(otheruser.getEmail());
-        sendmessagebtn.setOnClickListener(v ->{
-            String message=messageinput.getText().toString().trim();
-            if(message.isEmpty())
+        sendmessagebtn.setOnClickListener(v -> {
+            String message = messageinput.getText().toString().trim();
+            if (message.isEmpty()) {
                 return;
-                sendmessagetouser(message);
+            }
 
+            // Log the message to the console
+            Log.d("MessageInput", "Message: " + message);
+
+            // Send the message to the user
+            sendmessagetouser(message);
         });
         getOrCreateChatroomModel();
+        setupchatrecyclerview();
+    }
+    void setupchatrecyclerview(){
+        Query query;
+        query = firebaeUtil.getChatroomMessageRef(chatroomid).orderBy("timestamp", Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<chatMessageModel> options = new FirestoreRecyclerOptions.Builder<chatMessageModel>()
+                .setQuery(query, chatMessageModel.class)
+                .build();
+
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+        adapter = new ChatRecyclerAdapter(options, this);
+        LinearLayoutManager manager=new LinearLayoutManager(this);
+        manager.setReverseLayout(true);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
+
+
     }
     void sendmessagetouser(String message1){
+        chatroommodel.setLastMessageTimestamp(Timestamp.now());
+        chatroommodel.setLastMessageSenderId(firebaeUtil.currentUserId());
+        firebaeUtil.getchatRoomRefrence(chatroomid).set(chatroommodel);
+
+        chatMessageModel chatmessagemodel =new  chatMessageModel(message1,firebaeUtil.currentUserId(),Timestamp.now());
+        firebaeUtil.getChatroomMessageRef(chatroomid).add(chatmessagemodel)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if(task.isSuccessful()){
+                            messageinput.setText("");
+                        }
+                    }
+                });
+
 
     }
 

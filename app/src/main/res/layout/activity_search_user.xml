@@ -41,28 +41,21 @@
         android:layout_margin="10dp"
         android:id="@+id/search_user_layout">
 
-<!--        <EditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/edit_text_rounded_corner"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:hint="Username"-->
-<!--            android:padding="10dp"-->
-<!--            android:elevation="4dp"-->
-<!--            android:layout_toLeftOf="@id/search_user_btn"-->
-<!--            android:id="@+id/seach_username_input"-->
-<!--            />-->
-
-
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyler_view_new"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_user_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_user_layout"
-        android:padding="10dp"
-        android:id="@+id/search_user_recycler_view"
-        />
+        android:layout_marginTop="254dp"
+        android:padding="10dp" />
+
     <EditText
         android:id="@+id/search_field"
         android:layout_width="match_parent"
