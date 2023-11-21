@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,6 +16,7 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/button2"
@@ -34,15 +36,51 @@
 
 
     <EditText
-        android:id="@+id/editTextTextPassword5"
-        android:layout_width="177dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="384dp"
+        android:id="@+id/editTextTextPassword2"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="492dp"
         android:ems="10"
-        android:hint="Enter Password"
+        android:hint="Confirm new Password"
         android:inputType="textPassword"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="181dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="364dp"
+        android:ems="10"
+        android:hint="Enter Email"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80.00dp"
+        android:layout_height="80.00dp"
+        android:layout_marginTop="256dp"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="102dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="696dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +88,7 @@
         android:id="@+id/editTextPhone"
         android:layout_width="195dp"
         android:layout_height="49dp"
-        android:layout_marginTop="512dp"
+        android:layout_marginTop="556dp"
         android:ems="10"
         android:hint="Enter phone number"
         android:inputType="phone"
@@ -60,28 +98,15 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="181dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="320dp"
+        android:id="@+id/editTextTextPassword5"
+        android:layout_width="177dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="428dp"
         android:ems="10"
-        android:hint="Enter Email"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword2"
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="448dp"
-        android:ems="10"
-        android:hint="Confirm new Password"
+        android:hint="Enter Password"
         android:inputType="textPassword"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,24 +141,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="125dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="576dp"
-        android:text="Mentor"
+    <Button
+        android:id="@+id/buttonimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="288dp"
+        android:text="upload"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="102dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="652dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
