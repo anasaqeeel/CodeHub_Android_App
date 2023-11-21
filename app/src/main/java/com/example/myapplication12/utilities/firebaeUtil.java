@@ -75,6 +75,9 @@ public class firebaeUtil {
         return FirebaseFirestore.getInstance().collection("chatrooms").document(chatroomid);
 
     }
+    public static CollectionReference getChatroomMessageRef(String chatroomid){
+        return getchatRoomRefrence(chatroomid).collection("chats");
+    }
     public static String getchatroomid(String userid1, String userid2){
         if(userid1.hashCode()<userid2.hashCode()){
             return userid1+"_"+userid2;

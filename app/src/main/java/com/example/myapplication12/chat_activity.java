@@ -6,14 +6,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.models.chatRoomModel;
+import com.example.myapplication12.models.chatMessageModel;
 import com.example.myapplication12.utilities.androidutil;
 import com.example.myapplication12.utilities.firebaeUtil;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.Arrays;
 
@@ -70,14 +75,29 @@ public class chat_activity extends AppCompatActivity {
         otherusername.setText(otheruser.getEmail());
         sendmessagebtn.setOnClickListener(v ->{
             String message=messageinput.getText().toString().trim();
-            if(message.isEmpty())
-                return;
+            if(message.isEmpty()){
+                return;}
                 sendmessagetouser(message);
 
         });
         getOrCreateChatroomModel();
     }
     void sendmessagetouser(String message1){
+        chatroommodel.setLastMessageTimestamp(Timestamp.now());
+        chatroommodel.setLastMessageSenderId(firebaeUtil.currentUserId());
+        firebaeUtil.getchatRoomRefrence(chatroomid).set(chatroommodel);
+
+        chatMessageModel chatmessagemodel =new  chatMessageModel(message1,firebaeUtil.currentUserId(),Timestamp.now());
+        firebaeUtil.getChatroomMessageRef(chatroomid).add(chatmessagemodel)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if(task.isSuccessful()){
+                            messageinput.setText("");
+                        }
+                    }
+                });
+
 
     }
 
