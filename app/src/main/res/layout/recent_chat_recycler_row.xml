@@ -25,14 +25,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="User name"
+            android:text="User name"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:id="@+id/user_name"/>
+            android:id="@+id/user_email1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="xxxxxxxxxx"
+            android:text="xxxxxxxxxx"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:id="@+id/last_chat_time_text"/>
@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="xxxxxxxxxxx"
+            android:text="xxxxxxxxxxx"
             android:id="@+id/last_chat_text"/>
 
     </LinearLayout>

@@ -20,9 +20,12 @@ import java.util.HashMap;
 public class main extends AppCompatActivity {
 
     public static final String KEY_FCM_TOKEN = "fcmToken";
+    String updatedimage;
+    HashMap<String, Object> data = new HashMap<>();
+
     public static final String KEY_Collection_Users = "Login_Details";
     private PreferenceManager preferenceManager;
-
+    private Button updatebutton;
     private Button btn;
     private Button btn1;
     @SuppressLint("RestrictedApi")
@@ -36,12 +39,21 @@ public class main extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         //sharedPreferences = getSharedPreferences("YourPreferenceName", Context.MODE_PRIVATE);
 
+
         gettoken();
+        updatebutton=findViewById(R.id.update_profile_button1);
         btn = findViewById(R.id.lgtbtn);
         btn1 =findViewById(R.id.chatbtn);
+        updatebutton.setOnClickListener(v->openupdateprofile());
         btn.setOnClickListener(v -> logout());
         btn1.setOnClickListener(v->chatopen());
     }
+
+    private void openupdateprofile() {
+        Intent intent=new Intent(main.this,update_profile.class);
+        startActivity(intent);
+    }
+
 
     private void showtoast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -73,15 +85,18 @@ public class main extends AppCompatActivity {
 
     private void updateToken(String token) {
         if (token != null) {
+
             // Get the user's email from shared preferences
             String userEmail = preferenceManager.getString("user_email");
             String userImage = preferenceManager.getString("image");
+            //adding image to skills collection
+            //FirebaseFirestore.getInstance().collection("Skills").document(userEmail).update("image",userImage);
             if (!userImage.isEmpty()) {
                 FirebaseFirestore DB = FirebaseFirestore.getInstance();
                 DocumentReference documentReference = DB.collection(KEY_Collection_Users).document(userEmail);
-                documentReference.update("image", userImage)
-                        .addOnSuccessListener(unused -> showtoast("Image updated successfully!"))
-                        .addOnFailureListener(e -> showtoast("Unable to update image: " + e.getMessage()));
+//                documentReference.update("image", userImage)
+//                        .addOnSuccessListener(unused -> showtoast("Image updated successfully!"))
+//                        .addOnFailureListener(e -> showtoast("Unable to update image: " + e.getMessage()));
             } else {
                 showtoast("User image not found in shared preferences.");
             }
@@ -99,6 +114,7 @@ public class main extends AppCompatActivity {
         } else {
             showtoast("FCM token is null or not available.");
         }
+
     }
 
 }

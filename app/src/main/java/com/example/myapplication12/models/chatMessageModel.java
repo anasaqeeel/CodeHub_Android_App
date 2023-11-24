@@ -5,6 +5,9 @@ import com.google.firebase.Timestamp;
 public class chatMessageModel {
    private String message;
     private String senderId;
+
+    private String chatemail;
+
     private Timestamp timestamp;
 
     public chatMessageModel() {
@@ -15,6 +18,7 @@ public class chatMessageModel {
         this.senderId = senderId;
         this.timestamp = timestamp;
     }
+
 
     public String getMessage() {
         return message;

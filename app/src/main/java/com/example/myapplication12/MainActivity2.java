@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,14 +23,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity2 extends AppCompatActivity {
 
     private final int gallery_req_code=1000;
-    private EditText emailTV, passwordTV;
+    private EditText emailTV, passwordTV,skills;
     private Button regBtn;
     private ProgressBar progressBar;
     private String encodedImage;
@@ -67,12 +71,18 @@ public class MainActivity2 extends AppCompatActivity {
             private void registerNewUser() {
                 progressBar.setVisibility(View.VISIBLE);
 
-                String email, password;
+                String email, password,Skills;
                 email = emailTV.getText().toString();
                 password = passwordTV.getText().toString();
+                Skills=skills.getText().toString();
+
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(Skills)) {
+                    Toast.makeText(getApplicationContext(), "Please enter your skills!...", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (password.length() < 8) {
@@ -101,6 +111,11 @@ public class MainActivity2 extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // You can upload the encoded image to Firestore here
                                     preferenceManager.putString("image",encodedImage);
+
+                                    preferenceManager.putString("skills",Skills);
+
+                                    Log.d("image",preferenceManager.getString("image"));
+
                                     //uploadImageToFirestore(email, encodedImage.getBytes());
                                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                                     progressBar.setVisibility(View.GONE);
@@ -113,6 +128,20 @@ public class MainActivity2 extends AppCompatActivity {
                                 }
                             }
                         });
+
+                Map<String, Object> docData = new HashMap<>();
+                docData.put("skills", Skills);
+                docData.put("image", encodedImage);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("Skills")
+                        .document(email).set(docData).addOnCompleteListener(task -> {
+                                Toast.makeText(getApplicationContext(), "skills mn data inserted!", Toast.LENGTH_SHORT).show();
+                            })
+                                    .addOnFailureListener(exception -> {
+                                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+
+
             }
 
 
@@ -161,5 +190,6 @@ public class MainActivity2 extends AppCompatActivity {
         passwordTV = findViewById(R.id.editTextTextPassword5);
         regBtn = findViewById(R.id.button2);
         progressBar = findViewById(R.id.progressBar);
+        skills=findViewById(R.id.skills_text);
     }
 }

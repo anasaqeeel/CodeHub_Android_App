@@ -5,17 +5,21 @@ import java.util.List;
 
 public class chatRoomModel {
     String chatroomId;
+    String LastMessage;
     List<String> userIds;
+
+    String chatemail;
     Timestamp lastMessageTimestamp;
     String lastMessageSenderId;
     String lastMessage;
     public chatRoomModel() {
     }
-    public chatRoomModel(String chatroomId, List<String> userIds, Timestamp lastMessageTimestamp, String lastMessageSenderId) {
+    public chatRoomModel(String chatroomId,String chatemail, List<String> userIds, Timestamp lastMessageTimestamp, String lastMessageSenderId) {
         this.chatroomId = chatroomId;
         this.userIds = userIds;
         this.lastMessageTimestamp = lastMessageTimestamp;
         this.lastMessageSenderId = lastMessageSenderId;
+        this.chatemail=chatemail;
     }
     public String getChatroomId() {
         return chatroomId;
@@ -45,6 +49,22 @@ public class chatRoomModel {
 
     public void setLastMessageTimestamp(Timestamp lastMessageTimestamp) {
         this.lastMessageTimestamp = lastMessageTimestamp;
+    }
+
+    public String getLastMessage() {
+        return LastMessage;
+    }
+
+    public String getChatemail() {
+        return chatemail;
+    }
+
+    public void setChatemail(String chatemail) {
+        this.chatemail = chatemail;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        LastMessage = lastMessage;
     }
 
     public void setLastMessageSenderId(String lastMessageSenderId) {

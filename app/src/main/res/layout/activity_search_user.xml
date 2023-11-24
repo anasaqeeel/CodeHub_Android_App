@@ -41,14 +41,14 @@
         android:layout_margin="10dp"
         android:id="@+id/search_user_layout">
 
-    </RelativeLayout>/>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_user_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_user_layout"
-        android:layout_marginTop="254dp"
+        android:layout_marginTop="6dp"
         android:padding="10dp" />
 
     <EditText

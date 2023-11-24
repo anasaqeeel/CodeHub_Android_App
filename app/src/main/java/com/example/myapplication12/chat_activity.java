@@ -16,6 +16,7 @@ import com.example.myapplication12.adapters.ChatRecyclerAdapter;
 import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.models.chatMessageModel;
 import com.example.myapplication12.models.chatRoomModel;
+import com.example.myapplication12.utilities.PreferenceManager;
 import com.example.myapplication12.utilities.androidutil;
 import com.example.myapplication12.utilities.firebaeUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -30,6 +31,8 @@ import java.util.Arrays;
 public class chat_activity extends AppCompatActivity {
     UserModel otheruser;
     ChatRecyclerAdapter adapter;
+    private PreferenceManager preferenceManager;
+
     chatRoomModel chatroommodel;
     String chatroomid;
 
@@ -38,7 +41,7 @@ public class chat_activity extends AppCompatActivity {
     ImageButton backbtn;
     TextView otherusername;
     RecyclerView recyclerView;
-
+String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,14 @@ public class chat_activity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         otheruser = androidutil.getUserModelFromIntent(getIntent());
 
+        preferenceManager = new PreferenceManager(getApplicationContext());
+
         // Check if the currentUserId and otherUserId are not null
         String currentUserId = firebaeUtil.currentUserId();
         String otherUserId = (otheruser != null) ? otheruser.getUserId() : null;
+        email = preferenceManager.getString("user_email");
+        //email= firebaeUtil.currentUserId();
+        Log.d("emaill",email);
 
         if (currentUserId != null && otherUserId != null) {
             chatroomid = firebaeUtil.getchatroomid(currentUserId, otherUserId);
@@ -94,7 +102,7 @@ public class chat_activity extends AppCompatActivity {
             Log.d("MessageInput", "Message: " + message);
 
             // Send the message to the user
-            sendmessagetouser(message);
+            sendmessagetouser(message,email);
         });
         getOrCreateChatroomModel();
         setupchatrecyclerview();
@@ -125,9 +133,12 @@ public class chat_activity extends AppCompatActivity {
 
 
     }
-    void sendmessagetouser(String message1){
+    void sendmessagetouser(String message1,String email){
         chatroommodel.setLastMessageTimestamp(Timestamp.now());
         chatroommodel.setLastMessageSenderId(firebaeUtil.currentUserId());
+        chatroommodel.setLastMessage(message1);
+        chatroommodel.setChatemail(email);
+        //Overwrites the document referred to by this DocumentReference. If the document does not yet exist, it will be created. If a document already exists, it will be overwritten.
         firebaeUtil.getchatRoomRefrence(chatroomid).set(chatroommodel);
 
         chatMessageModel chatmessagemodel =new  chatMessageModel(message1,firebaeUtil.currentUserId(),Timestamp.now());
@@ -144,6 +155,7 @@ public class chat_activity extends AppCompatActivity {
 
     }
 
+    //inserting chatroom id doc to db
     void getOrCreateChatroomModel() {
         if (chatroomid != null) {
             firebaeUtil.getchatRoomRefrence(chatroomid).get().addOnCompleteListener(task -> {
@@ -152,6 +164,7 @@ public class chat_activity extends AppCompatActivity {
                     if (chatroommodel == null) {
                         chatroommodel = new chatRoomModel(
                                 chatroomid,
+                                email,
                                 Arrays.asList(firebaeUtil.currentUserId(), otheruser.getUserId()),
                                 Timestamp.now(),
                                 ""

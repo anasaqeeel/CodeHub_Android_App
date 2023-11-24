@@ -30,8 +30,7 @@ Context context;
     @Override
     protected void onBindViewHolder(@NonNull usermodelviewholder holder, int position, @NonNull UserModel model) {
         holder.usertext.setText(model.getEmail() != null ? model.getEmail() : "Unknown Email");
-        holder.phonetext.setText(model.getPassword()!=null? model.getPassword():"Unknown Phone");
-        // ... rest of the onBindViewHolder code ...
+        holder.phonetext.setText(model.getSkills()!=null? model.getSkills(): "skills not specified!");
         holder.itemView.setOnClickListener(v->{
             Intent intent=new Intent(context, chat_activity.class);
             androidutil.passUserModelAsIntent(intent,model);
@@ -70,7 +69,7 @@ Context context;
             public usermodelviewholder(@NonNull View itemView) {
 
                 super(itemView);
-                usertext = itemView.findViewById(R.id.user_name);
+                usertext = itemView.findViewById(R.id.user_email);
                 phonetext = itemView.findViewById(R.id.user_num);
                 img = itemView.findViewById(R.id.profile_img);
 

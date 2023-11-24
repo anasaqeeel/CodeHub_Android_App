@@ -3,18 +3,38 @@ package com.example.myapplication12.models;
 import com.google.firebase.Timestamp;
 public class UserModel {
     private String phone;
-    private String username;
+//  private String username;
     private Timestamp createdTimestamp;
     private String userId;
     private String fcmToken;
     private String email; // Add this line to have an email field in your UserModel
 
     private String password;
+    private String skills;
+    public UserModel() {
+
+    }
+
+    public UserModel(String password, String fcmToken,String email,String userId,String skills) {
+        this.email= email;
+        this.fcmToken=fcmToken;
+        this.password = password;
+        //this.createdTimestamp = createdTimestamp;
+        this.userId = userId;
+        this.skills=skills;
+    }
+
     public String getEmail() {
         return email;
     }
 
+    public String getSkills() {
+        return skills;
+    }
 
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
 
     public String getPassword() {
         return password;
@@ -26,16 +46,7 @@ public class UserModel {
     public void setEmail(String email) {
         this.email = email;
     }
-    public UserModel() {
 
-    }
-
-    public UserModel(String phone, String username, Timestamp createdTimestamp,String userId) {
-        this.phone = phone;
-        this.username = username;
-        this.createdTimestamp = createdTimestamp;
-        this.userId = userId;
-    }
 
     public String getPhone() {
         return phone;
@@ -46,13 +57,13 @@ public class UserModel {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     public Timestamp getCreatedTimestamp() {
         return createdTimestamp;
