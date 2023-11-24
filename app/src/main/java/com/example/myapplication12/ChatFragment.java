@@ -2,34 +2,25 @@ package com.example.myapplication12;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.PersistableBundle;
 import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ChatFragment extends Fragment {
-
-    private Button button1;
-
-    public ChatFragment() {
-        // Default constructor
-    }
-
+public class ChatFragment extends AppCompatActivity {
+    Button button;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_chat, container, false);
-        button1 = view.findViewById(R.id.s1);
-        button1.setOnClickListener(v -> openSearchUser());
-        return view;
-    }
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.frag_chat);
 
-    private void openSearchUser() {
-        Intent intent = new Intent(getActivity(), SearchUser.class);
+        button=findViewById(R.id.s1);
+        button.setOnClickListener(v->opensearchuser());
+
+    }
+    private void opensearchuser(){
+        Intent intent = new Intent(ChatFragment.this, SearchUser.class);
         startActivity(intent);
     }
 }
-
-
-

@@ -51,12 +51,11 @@ public class main extends AppCompatActivity {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
     }
     private void chatopen(){
-        ChatFragment chatFragment = new ChatFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, chatFragment) // Use the correct container ID
-                .addToBackStack(null)
-                .commit();
+        Intent intent = new Intent(main.this, ChatFragment.class);
+        startActivity(intent);
+        //startActivity(new Intent(getApplicationContext(),SearchUser.class));
     }
+
     private void logout() {
         showtoast("signing out...");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
