@@ -19,7 +19,6 @@ import com.google.firebase.firestore.Query;
 public class SearchUser extends AppCompatActivity {
     private SearchUserAdapters adapters;
     private RecyclerView recyclerView;
-    private RecyclerView recyclerView1;
 
     private EditText searchField;
     private Button searchButton;
@@ -31,7 +30,7 @@ public class SearchUser extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.search_user_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView1.findViewById(R.id.recyler_view_new);
+        //recyclerView1.findViewById(R.id.recyler_view_new);
         //setupRecyclerViewNew();
 
         searchField = findViewById(R.id.search_field);
@@ -56,7 +55,7 @@ public class SearchUser extends AppCompatActivity {
         Log.d("SearchUser", "Searching for: " + searchText);
         showUser(searchText);
     }
-    private void showUser(String searchEmail) {
+    void showUser(String searchEmail) {
         Query query;
         if (searchEmail.isEmpty()) {
             // Start with an empty query if no search text is provided
@@ -105,4 +104,5 @@ public class SearchUser extends AppCompatActivity {
             adapters.startListening();
         }
     }
+
 }

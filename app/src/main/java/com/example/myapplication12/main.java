@@ -51,11 +51,12 @@ public class main extends AppCompatActivity {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
     }
     private void chatopen(){
-        Intent intent = new Intent(main.this, SearchUser.class);
-        startActivity(intent);
-        //startActivity(new Intent(getApplicationContext(),SearchUser.class));
+        ChatFragment chatFragment = new ChatFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, chatFragment) // Use the correct container ID
+                .addToBackStack(null)
+                .commit();
     }
-
     private void logout() {
         showtoast("signing out...");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -101,39 +102,4 @@ public class main extends AppCompatActivity {
         }
     }
 
-//    void showUser(){
-//        //return all users
-//        Query query= firebaeUtil.allUserCollectionReference().
-//                whereGreaterThanOrEqualTo("email","code@gmail.com");
-//        FirestoreRecyclerOptions<UserModel> options=new FirestoreRecyclerOptions.Builder<UserModel>().
-//                setQuery(query,UserModel.class).build();
-//        adapters=new SearchUserAdapters(options,getApplicationContext());
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(adapters);
-//        adapters.startListening();
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if(adapters!=null){
-//            adapters.startListening();
-//        }
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if(adapters!=null){
-//            adapters.stopListening();
-//        }
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if(adapters!=null){
-//            adapters.startListening();
-//        }
-//    }
 }
