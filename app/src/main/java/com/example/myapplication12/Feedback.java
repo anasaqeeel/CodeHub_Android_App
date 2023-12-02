@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication12.adapters.SearchUserAdapters;
+import com.example.myapplication12.adapters.feedbackAdapter;
 import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.utilities.PreferenceManager;
 import com.example.myapplication12.utilities.firebaeUtil;
@@ -19,7 +19,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
 public class Feedback extends AppCompatActivity {
-    private SearchUserAdapters adapters;
+    private feedbackAdapter adapters;
     private PreferenceManager preferenceManager;
     private RecyclerView recyclerView;
 
@@ -87,7 +87,7 @@ public class Feedback extends AppCompatActivity {
         if (adapters != null) {
             adapters.stopListening();
         }
-        adapters = new SearchUserAdapters(options, this);
+        adapters = new feedbackAdapter(options, this);
         recyclerView.setAdapter(adapters);
         adapters.startListening();
     }
