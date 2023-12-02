@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication12.R;
 import com.example.myapplication12.models.UserModel;
-import com.example.myapplication12.update_profile;
+import com.example.myapplication12.submit_feedback;
 import com.example.myapplication12.utilities.androidutil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -32,7 +32,7 @@ public class feedbackAdapter extends FirestoreRecyclerAdapter<UserModel,feedback
         holder.usertext.setText(model.getEmail() != null ? model.getEmail() : "Unknown Email");
         holder.phonetext.setText(model.getSkills()!=null? model.getSkills(): "skills not specified!");
         holder.itemView.setOnClickListener(v->{
-            Intent intent=new Intent(context, update_profile.class);
+            Intent intent=new Intent(context, submit_feedback.class);
             androidutil.passUserModelAsIntent(intent,model);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
