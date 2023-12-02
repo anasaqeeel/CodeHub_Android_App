@@ -26,6 +26,8 @@ public class main extends AppCompatActivity {
     public static final String KEY_Collection_Users = "Login_Details";
     private PreferenceManager preferenceManager;
     private Button updatebutton;
+    private Button feedbackbutton;
+
     private Button btn;
     private Button btn1;
     @SuppressLint("RestrictedApi")
@@ -41,9 +43,11 @@ public class main extends AppCompatActivity {
 
 
         gettoken();
+        feedbackbutton=findViewById(R.id.feedback);
         updatebutton=findViewById(R.id.update_profile_button1);
         btn = findViewById(R.id.lgtbtn);
         btn1 =findViewById(R.id.chatbtn);
+        feedbackbutton.setOnClickListener(v->openfeedbackpage());
         updatebutton.setOnClickListener(v->openupdateprofile());
         btn.setOnClickListener(v -> logout());
         btn1.setOnClickListener(v->chatopen());
@@ -54,7 +58,9 @@ public class main extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    private void openfeedbackpage(){
+        Intent intent=new Intent(main.this)
+    }
     private void showtoast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
