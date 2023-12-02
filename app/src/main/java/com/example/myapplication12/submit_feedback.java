@@ -1,28 +1,66 @@
 package com.example.myapplication12;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication12.utilities.androidutil;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class submit_feedback extends AppCompatActivity {
     private RatingBar ratingBar;
+    private EditText feedbackEditText;
+    private Button updateButton;
+    private String email;
+    private float currentRating; // To store the current rating
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feedback); // replace with your layout file name
+        email = androidutil.getUserModelFromIntent(getIntent()).toString();
+        setContentView(R.layout.feedback);
 
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
+        feedbackEditText = (EditText) findViewById(R.id.editTextText2);
+        updateButton = findViewById(R.id.profle_update_btn_newF);
+
+        updateButton.setOnClickListener(v -> updateFeedback());
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Toast.makeText(submit_feedback.this, "Rating: " + rating, Toast.LENGTH_SHORT).show();
-                // You can also store this rating value in a variable or use it as needed
+                currentRating = rating;
             }
         });
     }
 
+    private void updateFeedback() {
+        String ratingString = "Rating: " + currentRating;
+        String feedbackText = feedbackEditText.getText().toString(); // Get feedback text from EditText
+        Log.d("ustad", ratingString + " | Feedback: " + feedbackText);
+
+        Map<String, Object> updateData = new HashMap<>();
+        updateData.put("Rating", ratingString);
+        updateData.put("Feedback", feedbackText); // Add feedback text to the update data
+
+        FirebaseFirestore.getInstance().collection("Login_Details").document(email).update(updateData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Handle success
+                        Toast.makeText(submit_feedback.this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Handle failure
+                        Toast.makeText(submit_feedback.this, "Failed to submit feedback", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }

@@ -21,6 +21,10 @@
             android:label="@string/title_activity_update_profile"
             android:theme="@style/Theme.MyApplication12" />
         <activity
+            android:name=".submit_feedback"
+            android:exported="false"
+            android:theme="@style/Theme.MyApplication12" />
+        <activity
             android:name=".chat_activity"
             android:exported="false" />
         <activity
