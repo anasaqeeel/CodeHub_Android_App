@@ -37,7 +37,6 @@ public class SearchUser extends AppCompatActivity {
         email = preferenceManager.getString("user_email");
         //skill1=preferenceManager.getString("skills");
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
 
@@ -87,7 +86,6 @@ public class SearchUser extends AppCompatActivity {
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
                 .setQuery(query, UserModel.class)
                 .build();
-
 
         if (adapters != null) {
             adapters.stopListening();
