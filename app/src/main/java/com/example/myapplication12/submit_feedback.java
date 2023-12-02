@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication12.models.UserModel;
+import com.example.myapplication12.utilities.PreferenceManager;
 import com.example.myapplication12.utilities.androidutil;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -22,6 +23,7 @@ public class submit_feedback extends AppCompatActivity {
     private Button updateButton;
     private String email;
     UserModel userModel;
+    PreferenceManager preferenceManager;
     private float currentRating; // To store the current rating
 
     @Override
@@ -31,6 +33,7 @@ public class submit_feedback extends AppCompatActivity {
         email=userModel.getEmail();
         setContentView(R.layout.feedback);
 
+//        preferenceManager=
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
         feedbackEditText = (EditText) findViewById(R.id.editTextText2);
         updateButton = findViewById(R.id.profle_update_btn_newF);

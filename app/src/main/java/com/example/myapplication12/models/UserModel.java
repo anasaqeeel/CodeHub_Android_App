@@ -10,18 +10,31 @@ public class UserModel {
     private String email; // Add this line to have an email field in your UserModel
 
     private String password;
+    private String Rating;
+
     private String skills;
+    private String Feedback;
     public UserModel() {
 
     }
 
-    public UserModel(String password, String fcmToken,String email,String userId,String skills) {
+    public UserModel(String password, String fcmToken,String email,String userId,String skills,String Rating,String Feedback) {
         this.email= email;
         this.fcmToken=fcmToken;
         this.password = password;
         //this.createdTimestamp = createdTimestamp;
         this.userId = userId;
         this.skills=skills;
+        this.Rating=Rating;
+        this.Feedback=Feedback;
+    }
+
+    public String getFeedback() {
+        return Feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        Feedback = feedback;
     }
 
     public String getEmail() {
@@ -30,6 +43,14 @@ public class UserModel {
 
     public String getSkills() {
         return skills;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
     }
 
     public void setSkills(String skills) {

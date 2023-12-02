@@ -31,6 +31,7 @@ Context context;
     protected void onBindViewHolder(@NonNull usermodelviewholder holder, int position, @NonNull UserModel model) {
         holder.usertext.setText(model.getEmail() != null ? model.getEmail() : "Unknown Email");
         holder.phonetext.setText(model.getSkills()!=null? model.getSkills(): "skills not specified!");
+        holder.ratingtext.setText(model.getRating()!=null? model.getRating(): "Rating not specified!");
         holder.itemView.setOnClickListener(v->{
             Intent intent=new Intent(context, chat_activity.class);
             androidutil.passUserModelAsIntent(intent,model);
@@ -63,6 +64,7 @@ Context context;
     class usermodelviewholder extends RecyclerView.ViewHolder {
             TextView usertext;
             TextView phonetext;
+            TextView ratingtext;
             ImageView img;
 
 
@@ -71,6 +73,7 @@ Context context;
                 super(itemView);
                 usertext = itemView.findViewById(R.id.user_email);
                 phonetext = itemView.findViewById(R.id.user_num);
+                ratingtext=itemView.findViewById(R.id.rating_text);
                 img = itemView.findViewById(R.id.profile_img);
 
             }

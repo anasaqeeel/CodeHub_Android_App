@@ -32,6 +32,11 @@
             android:layout_height="wrap_content"
             android:text="+000000000000"
             android:id="@+id/user_num"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/rating_text"/>
 
     </LinearLayout>
 
