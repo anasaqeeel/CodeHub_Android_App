@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.utilities.androidutil;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -20,12 +21,14 @@ public class submit_feedback extends AppCompatActivity {
     private EditText feedbackEditText;
     private Button updateButton;
     private String email;
+    UserModel userModel;
     private float currentRating; // To store the current rating
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        email = androidutil.getUserModelFromIntent(getIntent()).toString();
+        userModel= androidutil.getUserModelFromIntent(getIntent());
+        email=userModel.getEmail();
         setContentView(R.layout.feedback);
 
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
@@ -51,15 +54,19 @@ public class submit_feedback extends AppCompatActivity {
         Map<String, Object> updateData = new HashMap<>();
         updateData.put("Rating", ratingString);
         updateData.put("Feedback", feedbackText); // Add feedback text to the update data
+//        updateData.put("email",email);
+//        updateData.put("image",userModel.)
 
         FirebaseFirestore.getInstance().collection("Login_Details").document(email).update(updateData)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Handle success
                         Toast.makeText(submit_feedback.this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Handle failure
-                        Toast.makeText(submit_feedback.this, "Failed to submit feedback", Toast.LENGTH_SHORT).show();
+                        // Log the error or show a more descriptive error message
+                        if (task.getException() != null) {
+                            Log.e("submit_feedback", "Error submitting feedback", task.getException());
+                            Toast.makeText(submit_feedback.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
     }
