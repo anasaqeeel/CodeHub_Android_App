@@ -2,6 +2,15 @@ package com.example.myapplication12.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +26,7 @@ import com.example.myapplication12.utilities.androidutil;
 import com.example.myapplication12.view_profile_action;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class view_profileAdapter extends FirestoreRecyclerAdapter<UserModel,view_profileAdapter.usermodelviewholder> {
     Context context;
@@ -29,6 +39,16 @@ public class view_profileAdapter extends FirestoreRecyclerAdapter<UserModel,view
 
     @Override
     protected void onBindViewHolder(@NonNull usermodelviewholder holder, int position, @NonNull UserModel model) {
+        FirebaseFirestore.getInstance().collection("Login_Details")
+                .document(model.getEmail())
+                .get().addOnCompleteListener(innerTask -> {
+                    String encodedImage = innerTask.getResult().getString("image");
+                    if (encodedImage != null && !encodedImage.isEmpty()) {
+                        Bitmap decodedBitmap = decodeImage(encodedImage);
+                        Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                        holder.img.setImageBitmap(circularBitmap);
+                    }
+                });
         holder.usertext.setText(model.getEmail() != null ? model.getEmail() : "Unknown Email");
         holder.phonetext.setText(model.getSkills()!=null? model.getSkills(): "skills not specified!");
         holder.ratingtext.setText(model.getRating()!=null? model.getRating(): "Rating not specified!");
@@ -77,5 +97,28 @@ public class view_profileAdapter extends FirestoreRecyclerAdapter<UserModel,view
             img = itemView.findViewById(R.id.profile_img);
 
         }
+    }
+
+    private Bitmap decodeImage(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public Bitmap getCircularBitmap(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int min = Math.min(width, height);
+        Bitmap circularBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circularBitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(0, 0, min, min);
+        RectF rectF = new RectF(rect);
+
+        canvas.drawOval(rectF, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return circularBitmap;
     }
 }

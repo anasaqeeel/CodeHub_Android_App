@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,47 +10,26 @@
     android:theme="@style/CardView.Dark"
     tools:context=".main">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="CODE HUB"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="10dp" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="0dp">
-
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="349dp"
+        android:layout_height="676dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
-        app:layout_constraintTop_toTopOf="@+id/textView">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView3"
+            android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableEnd="@android:drawable/ic_menu_view"
-            android:text="Hi! User"
+            android:text="Hi "
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -58,7 +37,7 @@
             android:id="@+id/update_profile_button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/buttonbackground"
             android:drawableTop="@android:drawable/ic_menu_edit"
             android:padding="15dp"
@@ -70,7 +49,7 @@
             android:id="@+id/chatbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="35dp"
             android:background="@drawable/buttonbackground"
             android:drawableTop="@android:drawable/sym_action_chat"
 
@@ -83,7 +62,7 @@
             android:id="@+id/view_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="35dp"
             android:background="@drawable/buttonbackground"
             android:drawableTop="@android:drawable/ic_menu_view"
 
@@ -96,10 +75,9 @@
             android:id="@+id/feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/buttonbackground"
             android:drawableTop="@android:drawable/stat_notify_chat"
-
             android:padding="15dp"
             android:text="Submit feedback!"
             android:textColor="@color/black"
@@ -109,14 +87,42 @@
             android:id="@+id/lgtbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/buttonbackground"
             android:drawableTop="@drawable/icon_back"
             android:padding="15dp"
             android:text="LOGOUT"
             android:textColor="@color/black"
             app:backgroundTint="#ab8ad1" />
+
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="CODE HUB"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="10dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <!-- Your content goes here -->
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

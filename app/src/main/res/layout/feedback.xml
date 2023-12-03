@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_back"
-        android:text="Update profile"
+        android:text="Submit Feedback"
         android:textColor="@color/black"
         app:backgroundTint="#ab8ad1" />
 

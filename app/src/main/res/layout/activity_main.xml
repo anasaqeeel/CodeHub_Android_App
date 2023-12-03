@@ -52,6 +52,7 @@
             android:ems="10"
             android:hint=" Enter Email"
             android:inputType="text"
+            android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
         <EditText
@@ -73,7 +74,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/buttonbackground"
             android:text="LOGIN"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:backgroundTint="#ab8ad1"
             app:strokeColor="@color/black" />

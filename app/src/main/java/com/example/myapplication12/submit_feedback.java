@@ -53,7 +53,16 @@ public class submit_feedback extends AppCompatActivity {
         updateButton = findViewById(R.id.profle_update_btn_newF);
 
         updateButton.setOnClickListener(v -> updateFeedback());
-
+        FirebaseFirestore.getInstance().collection("Login_Details").document(email)
+                .get().addOnCompleteListener(task -> {
+                    String encodedImage = task.getResult().getString("image");
+                    Log.d("asal",encodedImage);
+                    if (encodedImage != null && !encodedImage.isEmpty()) {
+                        Bitmap decodedBitmap = decodeImage(encodedImage);
+                        Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                        ppf.setImageBitmap(circularBitmap);
+                    }
+                });
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -73,12 +82,6 @@ public class submit_feedback extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
 
-                            String encodedImage = task.getResult().getString("image");
-                            if (encodedImage != null && !encodedImage.isEmpty()) {
-                                Bitmap decodedBitmap = decodeImage(encodedImage);
-                                Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
-                               ppf.setImageBitmap(circularBitmap);
-                            }
                             // Retrieve current feedback and rating
                             String currentFeedback = document.contains("Feedback") ? document.getString("Feedback") : "";
                             String currentRatingString = document.contains("Rating") ? document.getString("Rating") : "Rating:0";

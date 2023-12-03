@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class main extends AppCompatActivity {
     public static final String KEY_Collection_Users = "Login_Details";
     private PreferenceManager preferenceManager;
     private Button updatebutton;
+    private TextView tt3;
     private Button feedbackbutton;
     private Button view_profileB;
 
@@ -45,9 +47,12 @@ public class main extends AppCompatActivity {
 
         gettoken();
         feedbackbutton=findViewById(R.id.feedback);
+
         updatebutton=findViewById(R.id.update_profile_button1);
         view_profileB=findViewById(R.id.view_profile);
         btn = findViewById(R.id.lgtbtn);
+        tt3=findViewById(R.id.textView3);
+        tt3.setText(preferenceManager.getString("user_email"));
         btn1 =findViewById(R.id.chatbtn);
         view_profileB.setOnClickListener(v->openviewprofile());
         feedbackbutton.setOnClickListener(v->openfeedbackpage());

@@ -1,5 +1,6 @@
 package com.example.myapplication12;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.utilities.PreferenceManager;
 import com.example.myapplication12.utilities.firebaeUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 
@@ -48,6 +50,8 @@ public class SearchUser extends AppCompatActivity {
         searchField = findViewById(R.id.search_field);
         searchButton = findViewById(R.id.search_button);
 
+
+
         // Initialize with no users shown
         showUser("");
 
@@ -57,6 +61,7 @@ public class SearchUser extends AppCompatActivity {
                 performSearch();
             }
         });
+
     }
 
 

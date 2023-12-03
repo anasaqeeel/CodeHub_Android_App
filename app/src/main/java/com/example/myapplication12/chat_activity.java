@@ -115,7 +115,6 @@ String email;
                     }
                 });
 
-
         sendmessagebtn.setOnClickListener(v -> {
             String message = messageinput.getText().toString().trim();
             if (message.isEmpty()) {
