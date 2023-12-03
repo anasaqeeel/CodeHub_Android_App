@@ -48,7 +48,7 @@ public class view_profile_action extends AppCompatActivity {
         userModel= androidutil.getUserModelFromIntent(getIntent());
         email=userModel.getEmail();
         setContentView(R.layout.view_profile);
-        profileImageView = findViewById(R.id.profile_image_view);
+        profileImageView = findViewById(R.id.profile_image_viewvp);
         emailTextView = findViewById(R.id.profile_email);
         userIdTextView = findViewById(R.id.profile_user_id);
         skillsTextView = findViewById(R.id.profile_skills);

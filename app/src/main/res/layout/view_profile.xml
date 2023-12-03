@@ -14,8 +14,8 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/profile_image_view"
-            android:layout_width="160dp"
+            android:id="@+id/profile_image_viewvp"
+            android:layout_width="165dp"
             android:layout_height="160dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/circular_bag"

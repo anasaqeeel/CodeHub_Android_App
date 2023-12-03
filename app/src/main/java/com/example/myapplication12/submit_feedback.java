@@ -1,9 +1,19 @@
 package com.example.myapplication12;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -23,6 +33,7 @@ public class submit_feedback extends AppCompatActivity {
     private EditText feedbackEditText;
     private Button updateButton;
     private String email;
+    private ImageView ppf;
     UserModel userModel;
     PreferenceManager preferenceManager;
     private float currentRating; // To store the current rating
@@ -35,6 +46,7 @@ public class submit_feedback extends AppCompatActivity {
         setContentView(R.layout.feedback);
         preferenceManager = new PreferenceManager(getApplicationContext());
 
+        ppf=findViewById(R.id.profile_image_viewf);
 //        preferenceManager=
         ratingBar = (RatingBar) findViewById(R.id.rating_bar);
         feedbackEditText = (EditText) findViewById(R.id.editTextText2);
@@ -60,6 +72,13 @@ public class submit_feedback extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
+
+                            String encodedImage = task.getResult().getString("image");
+                            if (encodedImage != null && !encodedImage.isEmpty()) {
+                                Bitmap decodedBitmap = decodeImage(encodedImage);
+                                Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                               ppf.setImageBitmap(circularBitmap);
+                            }
                             // Retrieve current feedback and rating
                             String currentFeedback = document.contains("Feedback") ? document.getString("Feedback") : "";
                             String currentRatingString = document.contains("Rating") ? document.getString("Rating") : "Rating:0";
@@ -103,6 +122,29 @@ public class submit_feedback extends AppCompatActivity {
                         Toast.makeText(submit_feedback.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    private Bitmap decodeImage(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public Bitmap getCircularBitmap(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int min = Math.min(width, height);
+        Bitmap circularBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circularBitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(0, 0, min, min);
+        RectF rectF = new RectF(rect);
+
+        canvas.drawOval(rectF, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return circularBitmap;
     }
 
 

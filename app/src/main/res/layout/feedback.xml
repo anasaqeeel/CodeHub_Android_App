@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".update_profile"
-    android:orientation="vertical"
+    android:background="#320d3e"
     android:gravity="center"
-    android:layout_margin="20dp">
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".update_profile">
 
     <ImageView
+        android:id="@+id/profile_image_viewf"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/circular_bag"
         android:backgroundTint="@color/my_primary"
-        android:src="@drawable/person_icon"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="40dp"
-        android:id="@+id/profile_image_viewf"/>
+        android:src="@drawable/person_icon" />
 
     <RatingBar
         android:id="@+id/rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="1.0"
-        android:rating="3"/>
+        android:rating="3"
+        android:stepSize="1.0" />
 
     <EditText
         android:id="@+id/editTextText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Feedback"
         android:inputType="text"
-        android:hint="Feedback" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/profle_update_btn_newF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_back"
-        android:text="Update profile" />
-
-
+        android:text="Update profile"
+        android:textColor="@color/black"
+        app:backgroundTint="#ab8ad1" />
 
 
 </LinearLayout>

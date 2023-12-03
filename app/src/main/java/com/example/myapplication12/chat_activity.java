@@ -1,9 +1,19 @@
 package com.example.myapplication12;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +34,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
@@ -32,6 +43,7 @@ public class chat_activity extends AppCompatActivity {
     UserModel otheruser;
     ChatRecyclerAdapter adapter;
     private PreferenceManager preferenceManager;
+    private ImageView ppp;
 
     chatRoomModel chatroommodel;
     String chatroomid;
@@ -48,7 +60,7 @@ String email;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         otheruser = androidutil.getUserModelFromIntent(getIntent());
-
+        ppp=findViewById(R.id.profile_pic_layout);
         preferenceManager = new PreferenceManager(getApplicationContext());
 
         // Check if the currentUserId and otherUserId are not null
@@ -92,6 +104,18 @@ String email;
             onBackPressed(); // Corrected to call onBackPressed method
         });
         otherusername.setText(otheruser.getEmail());
+        FirebaseFirestore.getInstance().collection("Login_Details")
+                .document(otheruser.getEmail())
+                .get().addOnCompleteListener(innerTask -> {
+                    String encodedImage = innerTask.getResult().getString("image");
+                    if (encodedImage != null && !encodedImage.isEmpty()) {
+                        Bitmap decodedBitmap = decodeImage(encodedImage);
+                        Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                        ppp.setImageBitmap(circularBitmap);
+                    }
+                });
+
+
         sendmessagebtn.setOnClickListener(v -> {
             String message = messageinput.getText().toString().trim();
             if (message.isEmpty()) {
@@ -178,6 +202,26 @@ String email;
             Toast.makeText(this, "Error: chatroomid is null.", Toast.LENGTH_LONG).show();
         }
     }
+    private Bitmap decodeImage(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 
+    public Bitmap getCircularBitmap(Bitmap bitmap) {
 
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int min = Math.min(width, height);
+        Bitmap circularBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circularBitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(0, 0, min, min);
+        RectF rectF = new RectF(rect);
+
+        canvas.drawOval(rectF, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return circularBitmap;
+    }
 }

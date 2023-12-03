@@ -2,6 +2,15 @@ package com.example.myapplication12.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +38,7 @@ import java.util.List;
 public class RecentChatRecylcerAdapter extends FirestoreRecyclerAdapter<chatRoomModel, RecentChatRecylcerAdapter.ChatRoomModelViewHolder> {
     Context context;
     UserModel otherUser;
+    private ImageView chatimage;
     PreferenceManager preferenceManager;
     private FirestoreRecyclerOptions<chatRoomModel> options;
 
@@ -43,6 +53,7 @@ public class RecentChatRecylcerAdapter extends FirestoreRecyclerAdapter<chatRoom
         // ... your existing code to set otherUserId ...
         // Log the user IDs from the userIds array
         Query query;
+
         Log.d("RecentChatRecycler", "User IDs in chat room: " + model.getUserIds());
 
             int check = firebaeUtil.getOtherUserFromChatroom(model.getUserIds());
@@ -73,6 +84,14 @@ public class RecentChatRecylcerAdapter extends FirestoreRecyclerAdapter<chatRoom
                                     if (innerTask.isSuccessful()) {
                                         UserModel fetchedUser = innerTask.getResult().toObject(UserModel.class);
                                         if (fetchedUser != null) {
+
+                                            String encodedImage = innerTask.getResult().getString("image");
+                                            if (encodedImage != null && !encodedImage.isEmpty()) {
+                                                Bitmap decodedBitmap = decodeImage(encodedImage);
+                                                Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                                                holder.img.setImageBitmap(circularBitmap);
+                                            }
+
                                             // Now you have the fetched user model, update your holder views
                                             holder.usertext.setText(fetchedUser.getEmail());
                                             boolean isme=model.getLastMessageSenderId().equals(firebaeUtil.currentUserId());
@@ -125,5 +144,27 @@ public class RecentChatRecylcerAdapter extends FirestoreRecyclerAdapter<chatRoom
             LastMessageTime = itemView.findViewById(R.id.last_chat_time_text);
             img = itemView.findViewById(R.id.profile_img);
         }
+    }
+    private Bitmap decodeImage(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public Bitmap getCircularBitmap(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int min = Math.min(width, height);
+        Bitmap circularBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circularBitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(0, 0, min, min);
+        RectF rectF = new RectF(rect);
+
+        canvas.drawOval(rectF, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return circularBitmap;
     }
 }
