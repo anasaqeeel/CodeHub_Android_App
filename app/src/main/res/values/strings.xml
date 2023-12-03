@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application12</string>
+    <string name="app_name">Code Hub</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_update_profile">update_profile</string>

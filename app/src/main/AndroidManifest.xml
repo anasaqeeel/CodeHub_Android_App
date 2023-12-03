@@ -15,6 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication12"
         tools:targetApi="31">
+
+
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/myimage"/>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/my_primary"/>
+
         <activity
             android:name=".update_profile"
             android:exported="false"
@@ -48,11 +55,11 @@
             android:label="Search User">
 
             <!-- You can add intent filters or other attributes here if needed -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity> <!-- <activity -->
         <!-- android:name=".SearchUserAdapters" -->
         <!-- android:label="Search User Adapters" -->

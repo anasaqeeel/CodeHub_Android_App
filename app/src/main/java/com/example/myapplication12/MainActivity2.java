@@ -144,7 +144,7 @@ public class MainActivity2 extends AppCompatActivity {
                 docData.put("Feedback","");
                 docData.put("email",email);
                 docData.put("password",password);
-                docData.put("Rating","");
+                docData.put("Rating","Rating:0.0");
                 docData.put("userId","");
 
 
