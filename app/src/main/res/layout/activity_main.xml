@@ -63,6 +63,7 @@
             android:drawableStart="@android:drawable/ic_lock_idle_lock"
             android:ems="10"
             android:hint="Enter Password"
+            android:textColor="@color/black"
             android:inputType="textPassword"
             android:textColorHint="@color/white"
             android:textSize="20sp" />
