@@ -31,6 +31,9 @@
             android:name=".view_profile"
             android:exported="false" />
         <activity
+            android:name=".view_profile_action"
+            android:exported="false" />
+        <activity
             android:name=".ChatFragment"
             android:exported="true" />
         <activity

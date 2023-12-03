@@ -1,82 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".update_profile"
-    android:orientation="vertical"
+    android:background="#320d3e"
     android:gravity="center"
-    android:layout_margin="20dp">
+    android:orientation="vertical"
+    tools:context=".update_profile">
 
     <ImageView
+        android:id="@+id/profile_image_view"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/circular_bag"
         android:backgroundTint="@color/my_primary"
-        android:src="@drawable/person_icon"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="40dp"
-        android:id="@+id/profile_image_view"/>
+        android:src="@drawable/person_icon" />
 
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="10dp"-->
-<!--        android:hint="Email "-->
-<!--        android:inputType="text"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="@drawable/edit_back"-->
-<!--        android:elevation="5dp"-->
-<!--        android:id="@+id/profile_email"-->
-<!--        />-->
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="10dp"-->
-<!--        android:hint="Password"-->
-<!--        android:inputType="text"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="@drawable/edit_back"-->
-<!--        android:elevation="5dp"-->
-<!--        android:enabled="false"-->
-<!--        android:id="@+id/profile_pass"-->
-<!--        />-->
+    <!--    <EditText-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:padding="10dp"-->
+    <!--        android:hint="Email "-->
+    <!--        android:inputType="text"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:background="@drawable/edit_back"-->
+    <!--        android:elevation="5dp"-->
+    <!--        android:id="@+id/profile_email"-->
+    <!--        />-->
+    <!--    <EditText-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:padding="10dp"-->
+    <!--        android:hint="Password"-->
+    <!--        android:inputType="text"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:background="@drawable/edit_back"-->
+    <!--        android:elevation="5dp"-->
+    <!--        android:enabled="false"-->
+    <!--        android:id="@+id/profile_pass"-->
+    <!--        />-->
 
     <EditText
+        android:id="@+id/profile_expertise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:hint="Expert In "
-        android:inputType="text"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:background="@drawable/edit_back"
         android:elevation="5dp"
         android:enabled="true"
-        android:id="@+id/profile_expertise"
-        />
+        android:hint="Expert In "
+        android:inputType="text"
+        android:padding="10dp" />
 
     <!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:gravity="center_vertical"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:orientation="vertical">-->
-<!--        -->
-<!--    </LinearLayout>-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:orientation="vertical">-->
+    <!--        -->
+    <!--    </LinearLayout>-->
 
     <Button
         android:id="@+id/profle_update_btn_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:background="@drawable/edit_back"
-        android:text="Update profile" />
+        android:text="Update profile"
+        android:textColor="@color/black"
+        app:backgroundTint="#ab8ad1" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/logout_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/buttonbackground"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="Logout"
-        android:id="@+id/logout_btn"/>
-
+        android:textAlignment="center"
+        android:textColor="@color/black" />
 
 
 </LinearLayout>

@@ -27,6 +27,7 @@ public class main extends AppCompatActivity {
     private PreferenceManager preferenceManager;
     private Button updatebutton;
     private Button feedbackbutton;
+    private Button view_profileB;
 
     private Button btn;
     private Button btn1;
@@ -45,14 +46,20 @@ public class main extends AppCompatActivity {
         gettoken();
         feedbackbutton=findViewById(R.id.feedback);
         updatebutton=findViewById(R.id.update_profile_button1);
+        view_profileB=findViewById(R.id.view_profile);
         btn = findViewById(R.id.lgtbtn);
         btn1 =findViewById(R.id.chatbtn);
+        view_profileB.setOnClickListener(v->openviewprofile());
         feedbackbutton.setOnClickListener(v->openfeedbackpage());
         updatebutton.setOnClickListener(v->openupdateprofile());
         btn.setOnClickListener(v -> logout());
         btn1.setOnClickListener(v->chatopen());
     }
 
+    private void openviewprofile(){
+        Intent intent=new Intent(main.this,view_profile.class);
+        startActivity(intent);
+    }
     private void openupdateprofile() {
         Intent intent=new Intent(main.this,update_profile.class);
         startActivity(intent);

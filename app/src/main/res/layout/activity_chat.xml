@@ -11,11 +11,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
+        android:background="#320d3e"
         android:padding="10dp">
 
 
         <TextView
+            android:id="@+id/other_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -25,18 +26,19 @@
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:id="@+id/other_user_name"
 
             />
 
-        <include layout="@layout/search_user_main"
+        <include
+            android:id="@+id/profile_pic_layout"
+            layout="@layout/search_user_main"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
             android:layout_toRightOf="@+id/back_btn"
-            android:id="@+id/profile_pic_layout"
 
             />
+
         <ImageButton
             android:id="@+id/back_btn"
             android:layout_width="32dp"
@@ -47,47 +49,52 @@
             app:tint="@color/white" />
 
     </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
 
+        android:id="@+id/chat_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
         android:layout_above="@id/bottom_layout"
-        android:id="@+id/chat_recycler_view"
-        />
-        <RelativeLayout
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/_c98994518b575bfd8c949e91d20548b" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="#320d3e"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/chat_message_input"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toLeftOf="@+id/message_send_btn"
+            android:background="@drawable/edit_back"
+            android:elevation="4dp"
+            android:hint="Write Messsage Here"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
-            android:layout_alignParentBottom="true"
+        <ImageButton
+            android:id="@+id/message_send_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
-            android:id="@+id/bottom_layout"
-            >
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toLeftOf="@+id/message_send_btn"
-                android:background="@drawable/edit_back"
-                android:elevation="4dp"
-                android:hint="Write Messsage Here"
-                android:padding="10dp"
-                android:id="@+id/chat_message_input"/>
-
-            <ImageButton
-                android:id="@+id/message_send_btn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="10dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:src="@drawable/icon_send"
-                app:tint="@color/black" />
-        </RelativeLayout>
+            android:src="@drawable/icon_send"
+            app:tint="#ab8ad1" />
+    </RelativeLayout>
 
 </RelativeLayout>

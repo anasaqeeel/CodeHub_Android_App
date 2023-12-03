@@ -5,14 +5,14 @@
     android:padding="8dp">
 
     <LinearLayout
+        android:id="@+id/left_chat_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/edit_back"
         android:backgroundTint="@color/black"
-        android:padding="8dp"
-        android:layout_marginEnd="80dp"
-        android:id="@+id/left_chat_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/left_chat_textview"
@@ -22,21 +22,23 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/right_chat_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_back"
-        android:backgroundTint="@color/green"
         android:layout_alignParentEnd="true"
-        android:padding="8dp"
         android:layout_marginStart="80dp"
-        android:id="@+id/right_chat_layout">
+        android:background="@drawable/edit_back"
+        android:backgroundTint="#ab8ad1"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/right_chat_textview"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonbackground"
+            android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>
 

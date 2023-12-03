@@ -1,10 +1,11 @@
 package com.example.myapplication12;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,65 +13,78 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.utilities.PreferenceManager;
 import com.example.myapplication12.utilities.androidutil;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class view_profile_action extends AppCompatActivity {
-    private RatingBar ratingBar;
     private EditText feedbackEditText;
     private Button updateButton;
     private String email;
     UserModel userModel;
     PreferenceManager preferenceManager;
     private float currentRating; // To store the current rating
+    private ImageView profileImageView;
+    private TextView emailTextView;
+    private TextView userIdTextView;
+    private TextView skillsTextView;
+    private RatingBar ratingBar;
+    private TextView feedbackTextView;
+    private Button goBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userModel= androidutil.getUserModelFromIntent(getIntent());
         email=userModel.getEmail();
-        setContentView(R.layout.feedback);
+        setContentView(R.layout.view_profile);
+        profileImageView = findViewById(R.id.profile_image_view);
+        emailTextView = findViewById(R.id.profile_email);
+        userIdTextView = findViewById(R.id.profile_user_id);
+        skillsTextView = findViewById(R.id.profile_skills);
+        ratingBar = findViewById(R.id.profile_rating_bar);
 
-//        preferenceManager=
-        ratingBar = (RatingBar) findViewById(R.id.rating_bar);
-        feedbackEditText = (EditText) findViewById(R.id.editTextText2);
-        updateButton = findViewById(R.id.profle_update_btn_newF);
+        feedbackTextView = findViewById(R.id.profile_feedback);
+        goBackButton = findViewById(R.id.profile_go_back_button);
+        fetchUserData();
 
-        updateButton.setOnClickListener(v -> updateFeedback());
-
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Toast.makeText(view_profile_action.this, "Rating: " + rating, Toast.LENGTH_SHORT).show();
-                currentRating = rating;
-            }
-        });
     }
-
-    private void updateFeedback() {
-        String ratingString = "Rating: " + currentRating;
-        String feedbackText = feedbackEditText.getText().toString(); // Get feedback text from EditText
-        Log.d("ustad", ratingString + " | Feedback: " + feedbackText);
-
-        Map<String, Object> updateData = new HashMap<>();
-        updateData.put("Rating", ratingString);
-        updateData.put("Feedback", feedbackText); // Add feedback text to the update data
-//        updateData.put("email",email);
-//        updateData.put("image",userModel.)
-
-        FirebaseFirestore.getInstance().collection("Login_Details").document(email).update(updateData)
+    private void fetchUserData() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Login_Details").document(email).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(view_profile_action.this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Log the error or show a more descriptive error message
-                        if (task.getException() != null) {
-                            Log.e("view_profile_action", "Error submitting feedback", task.getException());
-                            Toast.makeText(view_profile_action.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
+                            // Set email and user ID
+                            emailTextView.setText(document.getString("email"));
+                            userIdTextView.setText(document.getString("userId"));
+
+                            // Set skills
+                            skillsTextView.setText(document.getString("skills"));
+
+//                            // Set profile image
+//                            String imageUrl = document.getString("image");
+//                            if (imageUrl != null && !imageUrl.isEmpty()) {
+//                                Glide.with(view_profile_action.this).load(imageUrl).into(profileImageView);
+//                            }
+
+                            // Set rating
+                            String ratingString = document.getString("Rating");
+                            if (ratingString != null && !ratingString.isEmpty()) {
+                                float ratingValue = Float.parseFloat(ratingString.replaceAll("[^\\d.]", ""));
+                                ratingBar.setRating(ratingValue);
+                            }
+
+                            // Set feedback
+                            feedbackTextView.setText(document.getString("Feedback"));
+                        } else {
+                            Toast.makeText(view_profile_action.this, "User does not exist.", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        Toast.makeText(view_profile_action.this, "Failed to fetch user data.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
+
 }

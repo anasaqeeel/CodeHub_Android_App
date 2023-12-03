@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         Query query;
         Log.d("email ha",email1);
+//        Log.d("yar",preferenceManager.getString())
         db.collection("Skills").document(email1).get()
                 .addOnCompleteListener(task->{
         skillbefore =task.getResult().get("skills").toString();
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
                     db.collection("Login_Details")
                             .document(documentId)
-                            .set(data)
+                            .update(data)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(getApplicationContext(), "User data inserted!", Toast.LENGTH_SHORT).show();
                                 gettoken(email1);

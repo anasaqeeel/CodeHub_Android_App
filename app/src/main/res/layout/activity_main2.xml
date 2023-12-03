@@ -5,165 +5,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#320d3e"
     android:theme="@style/CardView.Dark"
     tools:context=".MainActivity">
 
+
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="429dp"
-        android:layout_height="263dp"
-        android:background="@drawable/my_shape"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/button2"
+        android:id="@+id/linearLayout8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:text="SIGNUP!"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword5"
-        app:layout_constraintVertical_bias="0.93"
-        app:strokeColor="@color/black" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword2"
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="492dp"
-        android:ems="10"
-        android:hint="Confirm new Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="181dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="364dp"
-        android:ems="10"
-        android:hint="Enter Email"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/skills_text"
-        android:layout_width="181dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="628dp"
-        android:ems="10"
-        android:hint="Enter your expertise "
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="80.00dp"
-        android:layout_height="80.00dp"
-        android:layout_marginTop="256dp"
-        android:scaleType="centerCrop"
-
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="102dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="696dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/almendra_bold_italic"
+            android:gravity="center"
+            android:lineSpacingExtra="0sp"
+            android:text="CodeHub"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="60sp" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="195dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="556dp"
-        android:ems="10"
-        android:hint="Enter phone number"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword5"
-        android:layout_width="177dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="428dp"
-        android:ems="10"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="376dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="172dp"
-        android:fontFamily="@font/almendra_bold_italic"
-        android:gravity="center"
-        android:text="WHERE SEEKERS BECOME MENTORS!"
-        android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="359dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="76dp"
-        android:fontFamily="@font/almendra_bold_italic"
-        android:gravity="center"
-        android:lineSpacingExtra="0sp"
-        android:text="CodeHub"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonimg"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="288dp"
-        android:text="upload"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80.0dp"
+            android:layout_height="80.0dp"
+            android:layout_marginLeft="140dp"
+
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="140dp"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/buttonimg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="100dp"
+            android:text="upload"
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:ems="10"
+            android:hint=" Enter Email"
+            android:inputType="text"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+            android:ems="10"
+            android:hint=" Enter Password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@android:drawable/checkbox_on_background"
+            android:ems="10"
+            android:hint=" Confirm new Password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@android:drawable/ic_dialog_dialer"
+            android:ems="10"
+            android:hint=" Enter phone number"
+            android:inputType="phone"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/skills_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@android:drawable/ic_dialog_info"
+            android:ems="10"
+            android:hint=" Enter your expertise "
+            android:inputType="text"
+            android:textColorHint="@color/white" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:backgroundTint="@color/black"
+            android:text="SIGNUP!"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:backgroundTint="#ab8ad1"
+            app:strokeColor="@color/black" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="115dp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
