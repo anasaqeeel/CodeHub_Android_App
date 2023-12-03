@@ -32,6 +32,15 @@
         android:padding="10dp" />
 
     <Button
+        android:id="@+id/button_change_pictureB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/edit_back"
+        android:text="Upload "
+        android:textColor="@color/black"
+        app:backgroundTint="#ab8ad1" />
+    <Button
         android:id="@+id/profle_update_btn_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

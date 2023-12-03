@@ -1,7 +1,18 @@
 package com.example.myapplication12;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,202 +20,165 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.myapplication12.models.UserModel;
 import com.example.myapplication12.utilities.PreferenceManager;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class update_profile extends AppCompatActivity {
 
-
+    private static final int PICK_IMAGE_REQUEST = 1;
     ImageView profilePic;
-    EditText useremailInput;
-    EditText passInput;
+    EditText expertise;
+    Button updateProfileBtn, changePictureBtn;
     UserModel currentUserModel;
     private FirebaseAuth mAuth;
-
-    String newUseremail;
-    Button updateProfileBtn;
-    TextView logoutBtn;
-    PreferenceManager preferenceManager;
     String email2;
-   EditText expertise;
-   String Expertise;
-    private AppBarConfiguration appBarConfiguration;
+    String Expertise;
+    PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-        preferenceManager = new PreferenceManager(getApplicationContext());
-        email2 = preferenceManager.getString("user_email");
-//        profilePic=findViewById(R.id.profile_image_view);
-//        passInput=findViewById(R.id.profile_pass);
-//        useremailInput=findViewById(R.id.profile_email);
-        updateProfileBtn=findViewById(R.id.profle_update_btn_new);
-//        logoutBtn=findViewById(R.id.logout_btn);
-        expertise=findViewById(R.id.profile_expertise);
 
         mAuth = FirebaseAuth.getInstance();
+        preferenceManager = new PreferenceManager(getApplicationContext());
+        email2 = preferenceManager.getString("user_email");
+
+        profilePic = findViewById(R.id.profile_image_view);
+        expertise = findViewById(R.id.profile_expertise);
+        updateProfileBtn = findViewById(R.id.profle_update_btn_new);
+        changePictureBtn = findViewById(R.id.button_change_pictureB);
+
         getUserData();
-        updateProfileBtn.setOnClickListener(v->updateBtnClick());
+        updateProfileBtn.setOnClickListener(v -> updateBtnClick());
+        changePictureBtn.setOnClickListener(v -> selectImageFromGallery());
+    }
+
+    void selectImageFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
     void updateBtnClick() {
-        Expertise=expertise.getText().toString();
-
-        //newUseremail = useremailInput.getText().toString();
-//        if (Expertise.isEmpty() ) {
-//           expertise.setError("Username length should be at least 3 chars");
-//            return;
-//        }
-//        else{
-
-            currentUserModel.setSkills(Expertise);
-            showtoast("updated !");
-            updateToFirestore();
-//        }
-
-//        if (selectedImageUri != null) {
-//            FirebaseUtil.getCurrentProfilePicStorageRef().putFile(selectedImageUri)
-//                    .addOnCompleteListener(task -> {
-//                        updateToFirestore();
-//                    });
-//        } else {
-//            updateToFirestore();
-//        }
-
+        Expertise = expertise.getText().toString();
+        currentUserModel.setSkills(Expertise);
+        showtoast("updated !");
+        updateToFirestore();
     }
-    void getUserData(){
-//        setInProgress(true);
+
+    void getUserData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Login_Details")
                 .document(email2).get().addOnCompleteListener(task -> {
-                    currentUserModel=task.getResult().toObject(UserModel.class);
-                    if(currentUserModel!=null) {
-//                        useremailInput.setText(currentUserModel.getEmail());
-//                        passInput.setText(currentUserModel.getPassword());
-                        //expertin update krna
-                        expertise.setText(currentUserModel.getSkills());
-                    }
-                    else{
-                        Log.d("currentusermodel","null ha ");
-                    }
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        currentUserModel = task.getResult().toObject(UserModel.class);
+                        if (currentUserModel != null) {
+                            expertise.setText(currentUserModel.getSkills());
 
-                });
-
-//        firebaeUtil.currentUserDetails().get().addOnCompleteListener(task -> {
-//            setInProgress(false);
-//            //currentUserModel;
-//            String test = task.getResult().toString();
-//            Log.d("raw",test);
-//
-//        });
-
-//        firebaeUtil.getCurrentProfilePicStorageRef().getDownloadUrl()
-//                .addOnCompleteListener(task -> {
-//                    if(task.isSuccessful()){
-//                        Uri uri  = task.getResult();
-//                        AndroidUtil.setProfilePic(getContext(),uri,profilePic);
-//                    }
-//                });
-
-
-    }
-
-    void updateToFirestore(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("Login_Details")
-//                .document(email2).set(currentUserModel)
-//                .addOnCompleteListener(task -> {
-////                    setInProgress(false);
-//                    if(task.isSuccessful()){
-//                        androidutil.showToast(getApplicationContext(),"Updated successfully");
-//                    }else{
-//                        androidutil.showToast(getApplicationContext(),"Updated failed");
-//                    }
-//                });
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("email", email2);
-        data.put("password",currentUserModel.getPassword());
-        data.put("fcmToken",currentUserModel.getFcmToken());
-        String newimage1=update_image(email2);
-
-        //data.put("image",newimage1);
-        //Log.d("perl",newimage1);
-        // Add user ID to the data map
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        data.put("userId", userId);
-        //inserting new to db
-        //new skills
-        data.put("skills",Expertise);
-        //idhr Skills mn bhi update krna
-        db.collection("Login_Details").document(email2).get()
-                .addOnCompleteListener(task-> {
-                    currentUserModel=task.getResult().toObject(UserModel.class);
-//                    db.collection("Login_Details").document(email2).delete();
-                    db.collection("Login_Details")
-                            .document(email2).update(data)
-                            .addOnSuccessListener(aVoid -> {
-                                //updateAuthEmail(newUseremail);
-                                Toast.makeText(getApplicationContext(), "User data inserted!", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(exception -> {
-                                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-        }) ;
-        FirebaseFirestore.getInstance().collection("Skills").document(email2).update("skills",Expertise);
-
-
-    }
-    String newimage;
-    private String update_image(String email2){
-        FirebaseFirestore.getInstance().collection("Skills").document(email2).get()
-                .addOnCompleteListener(task-> {
-                  newimage = task.getResult().get("image").toString();
-
-                });
-       return newimage;
-    }
-
-    private void updateAuthEmail(String newEmail) {
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        if (user != null) {
-            user.updateEmail(newEmail)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Only if the Auth email is updated successfully, delete the old document
-                            FirebaseFirestore.getInstance().collection("Login_Details").document(email2).delete()
-                                    .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(update_profile.this, "Email updated in Auth and old document deleted", Toast.LENGTH_SHORT).show();
-                                    })
-                                    .addOnFailureListener(e -> {
-//                                        Log.e("UpdateEmailError", "Failed to update email", task.getException());
-//                                        Toast.makeText(update_profile.this, "Failed to update email in Auth: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                    });
-
-                            // Update the email in PreferenceManager
-                            preferenceManager.putString("user_email", newEmail);
-                        } else {
-                            Log.e("abhi ", "Failed to update email", task.getException());
-
-                            Toast.makeText(update_profile.this, "Failed to update email in Auth", Toast.LENGTH_SHORT).show();
-                            // Consider reverting the Firestore update if Auth update fails
+                            String encodedImage = task.getResult().getString("image");
+                            if (encodedImage != null && !encodedImage.isEmpty()) {
+                                Bitmap decodedBitmap = decodeImage(encodedImage);
+                                Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                                profilePic.setImageBitmap(circularBitmap);
+                            }
                         }
-                    });
-        } else {
-            // User is not signed in
-            Toast.makeText(update_profile.this, "No authenticated user found", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private Bitmap decodeImage(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public Bitmap getCircularBitmap(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int min = Math.min(width, height);
+        Bitmap circularBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circularBitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(0, 0, min, min);
+        RectF rectF = new RectF(rect);
+
+        canvas.drawOval(rectF, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return circularBitmap;
+    }
+
+    void updateToFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("skills", Expertise);
+
+        String encodedImage = preferenceManager.getString("image");
+        if (encodedImage != null && !encodedImage.isEmpty()) {
+            data.put("image", encodedImage);
+        }
+
+        db.collection("Login_Details").document(email2).update(data)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getApplicationContext(), "User data updated!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                Bitmap circularBitmap = getCircularBitmap(bitmap);
+                profilePic.setImageBitmap(circularBitmap);
+                uploadImageToFirestore(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    private void uploadImageToFirestore(Bitmap bitmap) {
+        String encodedImage = encodedImage(bitmap);
+        preferenceManager.putString("image", encodedImage);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("image", encodedImage);
+        db.collection("Login_Details")
+                .document(email2).update(data)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getApplicationContext(), "Image updated!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private String encodedImage(Bitmap bitmap) {
+        int width = 150;
+        int height = bitmap.getHeight() * width / bitmap.getWidth();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
     private void showtoast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
-
 }

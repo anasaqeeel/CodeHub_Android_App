@@ -82,7 +82,7 @@
             android:hint="Write Messsage Here"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/white" />
 
         <ImageButton
             android:id="@+id/message_send_btn"

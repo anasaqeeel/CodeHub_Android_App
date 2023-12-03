@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#320d3e"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:gravity="center">
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/profile_image_view"
@@ -26,23 +28,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/profile_user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User ID"
             android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:text="User ID"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/profile_skills"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skills"
             android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:text="Skills"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/white" />
 
         <RatingBar
             android:id="@+id/profile_rating_bar"
@@ -50,33 +55,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:isIndicator="true"
             android:numStars="5"
-            android:stepSize="0.1"
-            android:isIndicator="true" />
+            android:stepSize="0.1" />
 
         <TextView
             android:id="@+id/profile_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating: 4.0"
             android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:text="Rating: 4.0"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/profile_feedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Feedback"
             android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:text="Feedback"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/profile_go_back_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/edit_back"
             android:text="Go Back"
-            android:layout_marginTop="20dp" />
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
 
     </LinearLayout>
 </ScrollView>

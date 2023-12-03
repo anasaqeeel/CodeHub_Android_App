@@ -1,6 +1,16 @@
 package com.example.myapplication12;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +40,7 @@ public class view_profile_action extends AppCompatActivity {
     private RatingBar ratingBar;
     private TextView feedbackTextView;
     private Button goBackButton;
+    private Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +53,17 @@ public class view_profile_action extends AppCompatActivity {
         userIdTextView = findViewById(R.id.profile_user_id);
         skillsTextView = findViewById(R.id.profile_skills);
         ratingBar = findViewById(R.id.profile_rating_bar);
+        back=findViewById(R.id.profile_go_back_button);
+        back.setOnClickListener(v->goback());
 
         feedbackTextView = findViewById(R.id.profile_feedback);
         goBackButton = findViewById(R.id.profile_go_back_button);
         fetchUserData();
 
+    }
+    private void goback(){
+        Intent intent=new Intent(view_profile_action.this,main.class);
+        startActivity(intent);
     }
     private void fetchUserData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -56,6 +73,14 @@ public class view_profile_action extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
                             // Set email and user ID
+
+                            String encodedImage = task.getResult().getString("image");
+                            if (encodedImage != null && !encodedImage.isEmpty()) {
+                                Bitmap decodedBitmap = decodeImage(encodedImage);
+                                Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                                profileImageView.setImageBitmap(circularBitmap);
+                            }
+
                             emailTextView.setText(document.getString("email"));
                             userIdTextView.setText(document.getString("userId"));
 
@@ -86,5 +111,27 @@ public class view_profile_action extends AppCompatActivity {
                 });
     }
 
+    private Bitmap decodeImage(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public Bitmap getCircularBitmap(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int min = Math.min(width, height);
+        Bitmap circularBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circularBitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Rect rect = new Rect(0, 0, min, min);
+        RectF rectF = new RectF(rect);
+
+        canvas.drawOval(rectF, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return circularBitmap;
+    }
 
 }
