@@ -133,6 +133,13 @@ public class update_profile extends AppCompatActivity {
                 .addOnFailureListener(exception -> {
                     Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+        db.collection("Skills").document(email2).update(data)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getApplicationContext(), "User data updated!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     @Override
@@ -159,6 +166,14 @@ public class update_profile extends AppCompatActivity {
         HashMap<String, Object> data = new HashMap<>();
         data.put("image", encodedImage);
         db.collection("Login_Details")
+                .document(email2).update(data)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getApplicationContext(), "Image updated!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+        db.collection("Skills")
                 .document(email2).update(data)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getApplicationContext(), "Image updated!", Toast.LENGTH_SHORT).show();
