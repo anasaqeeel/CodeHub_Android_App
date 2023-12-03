@@ -60,7 +60,7 @@ String email;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         otheruser = androidutil.getUserModelFromIntent(getIntent());
-        ppp=findViewById(R.id.profile_pic_layout);
+        ppp=findViewById(R.id.profile_img);
         preferenceManager = new PreferenceManager(getApplicationContext());
 
         // Check if the currentUserId and otherUserId are not null
