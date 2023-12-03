@@ -28,6 +28,9 @@
             android:name=".chat_activity"
             android:exported="false" />
         <activity
+            android:name=".view_profile"
+            android:exported="false" />
+        <activity
             android:name=".ChatFragment"
             android:exported="true" />
         <activity

@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Query query;
+        Log.d("email ha",email1);
         db.collection("Skills").document(email1).get()
                 .addOnCompleteListener(task->{
         skillbefore =task.getResult().get("skills").toString();
