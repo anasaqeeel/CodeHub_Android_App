@@ -6,72 +6,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/colorPrimaryDark"
+    android:background="#320d3e"
     android:theme="@style/CardView.Dark"
-    tools:context=".main"
-    >
+    tools:context=".main">
 
-    <Button
-        android:id="@+id/lgtbtn"
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="LOGOUT"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="CODE HUB"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="10dp" />
 
-    <Button
-        android:id="@+id/chatbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="248dp"
-        android:text="CHAT!!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.648"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/view_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="296dp"
-        android:text="View Profile "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/feedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:text="Submit feedback!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <Button
-        android:id="@+id/update_profile_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="396dp"
-        android:text="Update Profle "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.663"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/update_profile_button1"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="0dp">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+        app:layout_constraintTop_toTopOf="@+id/textView">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@android:drawable/ic_menu_view"
+            android:text="Hi! User"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/update_profile_button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/buttonbackground"
+            android:drawableTop="@android:drawable/ic_menu_edit"
+            android:padding="15dp"
+            android:text="Update Profle "
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
+
+        <Button
+            android:id="@+id/chatbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/buttonbackground"
+            android:drawableTop="@android:drawable/sym_action_chat"
+
+            android:padding="15dp"
+            android:text="CHAT!!"
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
+
+        <Button
+            android:id="@+id/view_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/buttonbackground"
+            android:drawableTop="@android:drawable/ic_menu_view"
+
+            android:padding="15dp"
+            android:text="View Profile "
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
+
+        <Button
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/buttonbackground"
+            android:drawableTop="@android:drawable/stat_notify_chat"
+
+            android:padding="15dp"
+            android:text="Submit feedback!"
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
+
+        <Button
+            android:id="@+id/lgtbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/buttonbackground"
+            android:drawableTop="@drawable/icon_back"
+            android:padding="15dp"
+            android:text="LOGOUT"
+            android:textColor="@color/black"
+            app:backgroundTint="#ab8ad1" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
