@@ -141,6 +141,22 @@ public class MainActivity2 extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
                                     });
 
+                docData.put("Feedback","");
+                docData.put("email",email);
+                docData.put("password",password);
+                docData.put("Rating","");
+                docData.put("userId","");
+
+
+                db.collection("Login_Details")
+                        .document(email).set(docData).addOnCompleteListener(task -> {
+                            Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(exception -> {
+                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+
+
 
             }
 
