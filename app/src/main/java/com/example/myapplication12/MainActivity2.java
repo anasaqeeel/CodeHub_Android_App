@@ -98,7 +98,7 @@ public class MainActivity2 extends AppCompatActivity {
                     return;
                 }
 
-                // Get the selected image from the ImageView and encode it
+                // Get the selected image from the ImageView and code it1
                 img.setDrawingCacheEnabled(true);
                 img.buildDrawingCache();
                 Bitmap bitmap = img.getDrawingCache();
