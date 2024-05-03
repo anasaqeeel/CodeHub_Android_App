@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        skillbefore=preferenceManager.getString("skills");
 
-        //for testind data insertion to firestorm db
+        //for testind data insertion to firestorm
         //loginBtn.setOnClickListener(v -> addDataToFirestore());
 
         loginBtn.setOnClickListener(v -> loginUserAccount());
