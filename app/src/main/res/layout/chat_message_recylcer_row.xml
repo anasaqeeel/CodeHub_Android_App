@@ -42,4 +42,23 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+    <!--<LinearLayout
+    android:id="@+id/left_chat_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_marginEnd="80dp"
+    android:background="@drawable/edit_back"
+    android:backgroundTint="#ab8ad1"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/left_chat_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonbackground"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+        -->
+
 </RelativeLayout>
