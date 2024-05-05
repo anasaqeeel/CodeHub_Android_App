@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        skillbefore=preferenceManager.getString("skills");
 
-        //for testind data insertion 
+        //for testind data  
         //loginBtn.setOnClickListener(v -> addDataToFirestore());
 
         loginBtn.setOnClickListener(v -> loginUserAccount());
