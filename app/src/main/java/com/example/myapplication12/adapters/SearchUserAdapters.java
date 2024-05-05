@@ -68,7 +68,7 @@ Context context;
         // Start listening to changes in Firestore with the new query
         startListening();
     }
-
+// okay
 
 
 
@@ -87,7 +87,7 @@ Context context;
             TextView ratingtext;
             ImageView img;
 
-
+// views for all
             public usermodelviewholder(@NonNull View itemView) {
 
                 super(itemView);
@@ -102,6 +102,7 @@ Context context;
         byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+    // bitmap
 
     public Bitmap getCircularBitmap(Bitmap bitmap) {
 
@@ -114,7 +115,7 @@ Context context;
         paint.setAntiAlias(true);
         Rect rect = new Rect(0, 0, min, min);
         RectF rectF = new RectF(rect);
-
+// canvas implementation
         canvas.drawOval(rectF, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
