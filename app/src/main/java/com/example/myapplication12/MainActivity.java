@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public String skillbefore, email, password;;
     public String token;
+    private Button fbtn;
     private PreferenceManager preferenceManager;
     HashMap<String, Object> data = new HashMap<>();
 
@@ -55,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         //loginBtn.setOnClickListener(v -> addDataToFirestore());
 
         loginBtn.setOnClickListener(v -> loginUserAccount());
+        fbtn=findViewById(R.id.fpass);
+        fbtn.setOnClickListener((v)->{
+           Intent intent = new Intent(MainActivity.this, fpass.class);
+            startActivity(intent);
+        });
         regbtn=findViewById(R.id.buttonn);
         regbtn.setOnClickListener(v->openactivity3());
     }
