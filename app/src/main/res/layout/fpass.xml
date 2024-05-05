@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#320d3e"
     android:theme="@style/CardView.Dark"
-    tools:context=".MainActivity">
+    tools:context=".fpass">
 
     <LinearLayout
         android:id="@+id/linearLayout6"
@@ -32,40 +32,22 @@
             android:textSize="60sp" />
     </LinearLayout>
 
-    <!-- <LinearLayout
-    android:id="@+id/linearLayout7"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:text="YourAppName"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="36sp" />
-</LinearLayout> -->
-
-
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="364dp"
+        android:layout_height="226dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+        app:layout_constraintVertical_bias="0.365">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/femail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@android:drawable/ic_dialog_email"
@@ -76,20 +58,20 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/editTextTextPassword5"
+            android:id="@+id/new_f_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:drawableStart="@android:drawable/ic_lock_idle_lock"
             android:ems="10"
-            android:hint="Enter Password"
-            android:textColor="@color/white"
+            android:hint="Enter New Password!"
             android:inputType="textPassword"
+            android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/fbutton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -99,44 +81,6 @@
             android:textSize="20sp"
             app:backgroundTint="#ab8ad1"
             app:strokeColor="@color/black" />
-
-        <Button
-            android:id="@+id/fpass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/buttonbackground"
-            android:text="Forget Password"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:backgroundTint="#ab8ad1"
-            app:strokeColor="@color/black" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Not a User?"
-            android:textColor="@color/light_gray"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/buttonn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Register Here!"
-            android:textColor="@color/black"
-            app:backgroundTint="#ab8ad1" />
-
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="25dp" />
 
     </LinearLayout>
 

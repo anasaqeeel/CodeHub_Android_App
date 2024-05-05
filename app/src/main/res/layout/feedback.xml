@@ -20,6 +20,16 @@
         android:scaleType="centerCrop"
         android:src="@drawable/person_icon" />
 
+    <!-- android:id="@+id/product_image_view"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/rounded_border"
+    android:backgroundTint="@color/blue"
+    android:scaleType="centerCrop"
+    android:src="@drawable/product_placeholder" -->
+
+
     <RatingBar
         android:id="@+id/rating_bar"
         android:layout_width="wrap_content"

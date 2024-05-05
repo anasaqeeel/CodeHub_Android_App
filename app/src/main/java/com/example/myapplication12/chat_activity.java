@@ -1,5 +1,6 @@
 package com.example.myapplication12;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,6 +12,7 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -53,6 +55,7 @@ public class chat_activity extends AppCompatActivity {
     ImageButton backbtn;
     TextView otherusername;
     RecyclerView recyclerView;
+    Button tick_btn;
 String email;
 
     @Override
@@ -98,6 +101,10 @@ String email;
         messageinput = findViewById(R.id.chat_message_input);
         sendmessagebtn = findViewById(R.id.message_send_btn);
         backbtn = findViewById(R.id.back_btn);
+        tick_btn=findViewById(R.id.tick);
+        tick_btn.setOnClickListener((v)->{
+            issue_resolved();
+        });
         otherusername = findViewById(R.id.other_user_name);
         recyclerView = findViewById(R.id.chat_recycler_view);
         backbtn.setOnClickListener((v) -> {
@@ -129,6 +136,10 @@ String email;
         });
         getOrCreateChatroomModel();
         setupchatrecyclerview();
+    }
+    private void issue_resolved(){
+        Intent intent = new Intent(chat_activity.this,Feedback.class);
+        startActivity(intent);
     }
     void setupchatrecyclerview(){
         Query query;

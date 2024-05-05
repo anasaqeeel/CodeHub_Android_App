@@ -63,7 +63,7 @@ public class RecentChatRecylcerAdapter extends FirestoreRecyclerAdapter<chatRoom
                 Log.d("1","1");
                 otherUserId = list.get(1);
             } else {
-                Log.d("phudi",check+"");
+                Log.d("p",check+"");
                 otherUserId = list.get(0);
             }
             Log.d("1st:", otherUserId);

@@ -39,6 +39,18 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 android:text="xxxxxxxxxx" />
+
+            <!--<TextView
+    android:id="@+id/last_message_time_textview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_marginEnd="10dp"
+    android:text="12:34 PM"
+    android:textColor="@color/dark_gray"
+    android:textSize="14sp" />
+    -->
+
         </RelativeLayout>
 
         <TextView
