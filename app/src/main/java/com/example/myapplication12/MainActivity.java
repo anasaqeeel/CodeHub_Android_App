@@ -51,12 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
 //        skillbefore=preferenceManager.getString("skills");
 
-        //for testind data insertion to firestorm
+        //for testind data insertion 
         //loginBtn.setOnClickListener(v -> addDataToFirestore());
 
         loginBtn.setOnClickListener(v -> loginUserAccount());
         regbtn=findViewById(R.id.buttonn);
         regbtn.setOnClickListener(v->openactivity3());
+
+        
+
+        
     }
     private void loginUserAccount() {
         progressBar.setVisibility(View.VISIBLE);
