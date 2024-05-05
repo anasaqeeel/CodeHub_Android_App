@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        skillbefore=preferenceManager.getString("skills");
 
-        //for testind data insertion to firestorm db
+        //for testind data insertion to firestorm
         //loginBtn.setOnClickListener(v -> addDataToFirestore());
 
         loginBtn.setOnClickListener(v -> loginUserAccount());
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
             return;
         }
+
+
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
             return;
