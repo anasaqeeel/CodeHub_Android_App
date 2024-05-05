@@ -9,6 +9,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -36,8 +37,13 @@ public class MainActivity2 extends AppCompatActivity {
     private EditText emailTV, passwordTV,skills;
     private Button regBtn;
     private ProgressBar progressBar;
+    private EditText hourlyRateTV;
+    private CheckBox mentorCheckbox;
+
     private String encodedImage;
     private FirebaseAuth mAuth;
+    private EditText hrate;
+
     ImageView img;
     private PreferenceManager preferenceManager;
     @Override
@@ -71,10 +77,12 @@ public class MainActivity2 extends AppCompatActivity {
             private void registerNewUser() {
                 progressBar.setVisibility(View.VISIBLE);
 
-                String email, password,Skills;
+                String email, password,Skills,hrate1;
+                hrate1=hrate.getText().toString();
                 email = emailTV.getText().toString();
                 password = passwordTV.getText().toString();
                 Skills=skills.getText().toString();
+
 
 
                 if (TextUtils.isEmpty(email)) {
@@ -110,7 +118,9 @@ public class MainActivity2 extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // You can upload the encoded image to Firestore here
+
                                     preferenceManager.putString("image",encodedImage);
+                                    preferenceManager.putString("hourly rate",hrate1);
 
                                     preferenceManager.putString("skills",Skills);
 
@@ -131,6 +141,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                 Map<String, Object> docData = new HashMap<>();
                 docData.put("skills", Skills);
+                docData.put("hourly rate ",hrate1);
                 docData.put("image", encodedImage);
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("Skills")
@@ -146,7 +157,7 @@ public class MainActivity2 extends AppCompatActivity {
                 docData.put("password",password);
                 docData.put("Rating","Rating:0.0");
                 docData.put("userId","");
-
+                docData.put("hourly rate ",hrate1);
 
                 db.collection("Login_Details")
                         .document(email).set(docData).addOnCompleteListener(task -> {
@@ -155,12 +166,7 @@ public class MainActivity2 extends AppCompatActivity {
                         .addOnFailureListener(exception -> {
                             Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
                         });
-
-
-
             }
-
-
         });
     }
 
@@ -195,17 +201,25 @@ public class MainActivity2 extends AppCompatActivity {
         previewBitmap.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(bytes,Base64.DEFAULT);
-
-        //ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        //Bitmap imageBitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
-        //imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
     }
 
     private void initializeUI() {
         emailTV = findViewById(R.id.editTextText);
         passwordTV = findViewById(R.id.editTextTextPassword5);
         regBtn = findViewById(R.id.button2);
+        hrate=findViewById(R.id.editTextHourlyRate);
         progressBar = findViewById(R.id.progressBar);
         skills=findViewById(R.id.skills_text);
+        hourlyRateTV = findViewById(R.id.editTextHourlyRate);
+        mentorCheckbox = findViewById(R.id.checkboxMentor);
+
+        mentorCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                hourlyRateTV.setVisibility(View.VISIBLE);
+            } else {
+                hourlyRateTV.setVisibility(View.GONE);
+            }
+        });
     }
+
 }

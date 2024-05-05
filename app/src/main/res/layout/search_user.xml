@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/buttonbackground"
-    android:elevation="2dp">
+    android:elevation="2dp"
+    android:orientation="horizontal">
 
     <include
         layout="@layout/search_user_main"
@@ -14,11 +15,11 @@
         android:layout_margin="10dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_gravity="center"
         android:orientation="vertical">
-
 
         <TextView
             android:id="@+id/user_email"
@@ -35,11 +36,17 @@
             android:text="+000000000000" />
 
         <TextView
+            android:id="@+id/rating_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/rating_text"/>
+            android:text="" />
 
+        <TextView
+            android:id="@+id/hourly_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hourly Rate: $00.00/hr"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

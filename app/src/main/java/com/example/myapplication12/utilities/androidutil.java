@@ -39,6 +39,7 @@ public class androidutil {
         userModel.setFcmToken(intent.getStringExtra("fcmToken"));
         userModel.setUserId(intent.getStringExtra("userId"));
         userModel.setSkills(intent.getStringExtra("skills"));
+//        userModel.setHourly_Rate(intent.getStringExtra("hourly rate"));
 
         return userModel;
     }

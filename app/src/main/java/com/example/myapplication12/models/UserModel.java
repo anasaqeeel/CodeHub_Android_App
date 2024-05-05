@@ -7,18 +7,23 @@ public class UserModel {
     private Timestamp createdTimestamp;
     private String userId;
     private String fcmToken;
-    private String email; // Add this line to have an email field in your UserModel
+    private String email;
 
     private String password;
     private String Rating;
 
     private String skills;
     private String Feedback;
+    private String Hourly_Rate;
+
     public UserModel() {
 
     }
 
-    public UserModel(String password, String fcmToken,String email,String userId,String skills,String Rating,String Feedback) {
+
+
+    public UserModel(String password, String fcmToken, String email, String userId, String skills, String Rating, String Feedback,
+                     String HourlyRate) {
         this.email= email;
         this.fcmToken=fcmToken;
         this.password = password;
@@ -27,6 +32,8 @@ public class UserModel {
         this.skills=skills;
         this.Rating=Rating;
         this.Feedback=Feedback;
+        this.Hourly_Rate=HourlyRate;
+
     }
 
     public String getFeedback() {
@@ -69,6 +76,13 @@ public class UserModel {
     }
 
 
+    public String getHourly_Rate() {
+        return Hourly_Rate;
+    }
+
+    public void setHourly_Rate(String hourly_Rate) {
+        Hourly_Rate = hourly_Rate;
+    }
     public String getPhone() {
         return phone;
     }

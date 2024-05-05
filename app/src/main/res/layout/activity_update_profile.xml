@@ -30,6 +30,17 @@
         android:hint="Expert In "
         android:inputType="text"
         android:padding="10dp" />
+    <EditText
+        android:id="@+id/updatehrate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:inputType="numberDecimal"
+        android:enabled="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint=" Enter hourly rate ($)"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/button_change_pictureB"

@@ -35,11 +35,12 @@ public class update_profile extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     ImageView profilePic;
     EditText expertise;
+    EditText hrateUpdated;
     Button updateProfileBtn, changePictureBtn;
     UserModel currentUserModel;
     private FirebaseAuth mAuth;
     String email2;
-    String Expertise;
+    String Expertise,newrate;
     PreferenceManager preferenceManager;
 
     @Override
@@ -51,6 +52,7 @@ public class update_profile extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         email2 = preferenceManager.getString("user_email");
 
+        hrateUpdated=findViewById(R.id.updatehrate);
         profilePic = findViewById(R.id.profile_image_view);
         expertise = findViewById(R.id.profile_expertise);
         updateProfileBtn = findViewById(R.id.profle_update_btn_new);
@@ -68,6 +70,8 @@ public class update_profile extends AppCompatActivity {
 
     void updateBtnClick() {
         Expertise = expertise.getText().toString();
+        newrate=hrateUpdated.getText().toString();
+        currentUserModel.setHourly_Rate(newrate);
         currentUserModel.setSkills(Expertise);
         showtoast("updated !");
         updateToFirestore();
@@ -120,6 +124,7 @@ public class update_profile extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> data = new HashMap<>();
         data.put("skills", Expertise);
+        data.put("hourly rate ",newrate);
 
         String encodedImage = preferenceManager.getString("image");
         if (encodedImage != null && !encodedImage.isEmpty()) {

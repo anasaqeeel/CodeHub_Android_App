@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     UserModel currentUserModel;
 
     private FirebaseAuth mAuth;
-    public String skillbefore, email, password;;
+    public String skillbefore, email, password, Hrate;
     public String token;
     private Button fbtn;
     private PreferenceManager preferenceManager;
@@ -145,7 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(task->{
         skillbefore =task.getResult().get("skills").toString();
         newimage=task.getResult().get("image").toString();
-        Log.d("anas",skillbefore);
+
+                    Object hourlyRateObj = task.getResult().get("hourly rate"); // Safely retrieve the object
+                    String Hrate = (hourlyRateObj != null) ? hourlyRateObj.toString() : "0"; // Check for null and use "0" if null
+
+
+                    Log.d("anas",skillbefore);
                     data.put("email", email1);
                     data.put("password", password1);
                     Log.d("sana",skillbefore);
