@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+# This is a comment explaining why we're ignoring certain files
