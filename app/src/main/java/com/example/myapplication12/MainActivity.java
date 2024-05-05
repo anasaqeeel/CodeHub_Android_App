@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //login krty wy sab ki skills ko null kr rha ha
+
        // String SKills=preferenceManager.getString("skills");
         // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     data.put("skills",skillbefore);
                     data.put("image",newimage);
 //                    data.put("fcmToken","");
-                    // Add user ID to the data map
+                    // Add user ID to the data maap
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     data.put("userId", userId);
                     String documentId = email1;
@@ -177,6 +178,34 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+// /getSharedPreferencesfg
+// fgf
+// failedff
+
+// failedfff
+// failed
+
+// failedffff
+
+// failedfffff
+
+// failedfffff
+// f
+
+// failedfffff
+
+// failedfffff
+// failedffff
+// failedff
+
+// dfds
+
+
+// dsgfs
+
+
 
     private void openactivity3() {
         Intent intent=new Intent(this,MainActivity2.class);
