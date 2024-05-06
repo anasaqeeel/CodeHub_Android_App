@@ -180,31 +180,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-// /getSharedPreferencesfg
-// fgf
-// failedff
-
-// failedfff
-// failed
-
-// failedffff
-
-// failedfffff
-
-// failedfffff
-// f
-
-// failedfffff
-
-// failedfffff
-// failedffff
-// failedff
-
-// dfds
-
-
-// dsgfs
-
 
 
     private void openactivity3() {
