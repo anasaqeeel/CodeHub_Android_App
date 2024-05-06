@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
+// my application12
 rootProject.name = "My Application12"
 include(":app")
  

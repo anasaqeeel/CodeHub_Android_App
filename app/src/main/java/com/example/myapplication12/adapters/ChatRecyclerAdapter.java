@@ -19,11 +19,12 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<chatMessageModel,ChatRecyclerAdapter.ChatModelViewHolder> {
     Context context;
     private FirestoreRecyclerOptions<chatMessageModel> options;
-
+// recycler view is here 
     public ChatRecyclerAdapter(@NonNull FirestoreRecyclerOptions<chatMessageModel> options,Context context) {
         super(options);
         this.context=context;
     }
+    // chat recycler adapter this.context
 
     @Override
     protected void onBindViewHolder(@NonNull ChatModelViewHolder holder, int position, @NonNull chatMessageModel model) {
@@ -41,7 +42,8 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<chatMessageMod
     }
 
     public void updateOptions(FirestoreRecyclerOptions<chatMessageModel> newOptions) {
-        // Stop listening to changes in the Firestore
+        // Stop listening to changes in the fire store
+        // stop listening
         stopListening();
         // Update the options
         this.options = newOptions; // Make sure the 'options' field is accessible here.
@@ -50,7 +52,7 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<chatMessageMod
     }
 
 
-
+// chat model view holder
 
 
     @NonNull
@@ -74,7 +76,7 @@ TextView leftchattextview, rightchattextview;
             leftchattextview=itemView.findViewById(R.id.left_chat_textview);
             rightchattextview=itemView.findViewById(R.id.right_chat_textview);
 
-
+// find views by id
         }
     }
 }
