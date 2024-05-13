@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        skillbefore=preferenceManager.getString("skills");
 
-        //for testind data insertion to firestorm
+        //for testind data  
         //loginBtn.setOnClickListener(v -> addDataToFirestore());
 
         loginBtn.setOnClickListener(v -> loginUserAccount());
@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         });
         regbtn=findViewById(R.id.buttonn);
         regbtn.setOnClickListener(v->openactivity3());
+
+        
+
+        
     }
     private void loginUserAccount() {
         progressBar.setVisibility(View.VISIBLE);
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //login krty wy sab ki skills ko null kr rha ha
+
        // String SKills=preferenceManager.getString("skills");
         // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -158,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     data.put("skills",skillbefore);
                     data.put("image",newimage);
 //                    data.put("fcmToken","");
-                    // Add user ID to the data map
+                    // Add user ID to the data maap
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     data.put("userId", userId);
                     String documentId = email1;
@@ -178,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
 
     private void openactivity3() {
         Intent intent=new Intent(this,MainActivity2.class);

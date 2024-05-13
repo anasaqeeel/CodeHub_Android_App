@@ -36,7 +36,7 @@ public class view_profileAdapter extends FirestoreRecyclerAdapter<UserModel,view
         super(options);
         this.context=context;
     }
-
+// on bind
     @Override
     protected void onBindViewHolder(@NonNull usermodelviewholder holder, int position, @NonNull UserModel model) {
         FirebaseFirestore.getInstance().collection("Login_Details")

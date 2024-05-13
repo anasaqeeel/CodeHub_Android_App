@@ -27,6 +27,7 @@ import com.example.myapplication12.utilities.androidutil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
+// feedback adapter
 
 public class feedbackAdapter extends FirestoreRecyclerAdapter<UserModel,feedbackAdapter.usermodelviewholder> {
     Context context;
@@ -36,7 +37,7 @@ public class feedbackAdapter extends FirestoreRecyclerAdapter<UserModel,feedback
         super(options);
         this.context=context;
     }
-
+// onbindView holder
     @Override
     protected void onBindViewHolder(@NonNull usermodelviewholder holder, int position, @NonNull UserModel model) {
         FirebaseFirestore.getInstance().collection("Login_Details")
