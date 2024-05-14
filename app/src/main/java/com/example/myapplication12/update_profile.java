@@ -16,7 +16,6 @@ import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,11 +35,11 @@ public class update_profile extends AppCompatActivity {
     ImageView profilePic;
     EditText expertise;
     EditText hrateUpdated;
-    Button updateProfileBtn, changePictureBtn;
+    Button updateProfileBtn, changePictureBtn, forgotPasswordBtn;
     UserModel currentUserModel;
     private FirebaseAuth mAuth;
     String email2;
-    String Expertise,newrate;
+    String Expertise, newrate;
     PreferenceManager preferenceManager;
 
     @Override
@@ -52,15 +51,17 @@ public class update_profile extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         email2 = preferenceManager.getString("user_email");
 
-        hrateUpdated=findViewById(R.id.updatehrate);
+        hrateUpdated = findViewById(R.id.updatehrate);
         profilePic = findViewById(R.id.profile_image_view);
         expertise = findViewById(R.id.profile_expertise);
         updateProfileBtn = findViewById(R.id.profle_update_btn_new);
         changePictureBtn = findViewById(R.id.button_change_pictureB);
+        forgotPasswordBtn = findViewById(R.id.button_forgot_password);
 
         getUserData();
         updateProfileBtn.setOnClickListener(v -> updateBtnClick());
         changePictureBtn.setOnClickListener(v -> selectImageFromGallery());
+        forgotPasswordBtn.setOnClickListener(v -> sendPasswordResetEmail(email2));
     }
 
     void selectImageFromGallery() {
@@ -70,10 +71,10 @@ public class update_profile extends AppCompatActivity {
 
     void updateBtnClick() {
         Expertise = expertise.getText().toString();
-        newrate=hrateUpdated.getText().toString();
+        newrate = hrateUpdated.getText().toString();
         currentUserModel.setHourly_Rate(newrate);
         currentUserModel.setSkills(Expertise);
-        showtoast("updated !");
+        showtoast("updated!");
         updateToFirestore();
     }
 
@@ -124,7 +125,7 @@ public class update_profile extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> data = new HashMap<>();
         data.put("skills", Expertise);
-        data.put("hourly rate ",newrate);
+        data.put("hourly rate", newrate);
 
         String encodedImage = preferenceManager.getString("image");
         if (encodedImage != null && !encodedImage.isEmpty()) {
@@ -200,5 +201,16 @@ public class update_profile extends AppCompatActivity {
 
     private void showtoast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(update_profile.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(update_profile.this, "Error in sending password reset email.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

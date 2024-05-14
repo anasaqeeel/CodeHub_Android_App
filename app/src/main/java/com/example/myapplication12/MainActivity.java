@@ -89,10 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
                         // Firebase authentication successful
-
-
                         Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
 //                        Query query =firebaeUtil.allUserCollectionReference().whereEqualTo("email",email);
