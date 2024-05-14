@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         skillbefore =task.getResult().get("skills").toString();
         newimage=task.getResult().get("image").toString();
 
-                    Object hourlyRateObj = task.getResult().get("hourly rate"); // Safely retrieve the object
+                    Object hourlyRateObj = task.getResult().get("hourly rate "); // Safely retrieve the object
                     String Hrate = (hourlyRateObj != null) ? hourlyRateObj.toString() : "0"; // Check for null and use "0" if null
 
 

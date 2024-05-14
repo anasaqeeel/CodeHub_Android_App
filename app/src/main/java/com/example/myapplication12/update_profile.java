@@ -125,7 +125,7 @@ public class update_profile extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> data = new HashMap<>();
         data.put("skills", Expertise);
-        data.put("hourly rate", newrate);
+        data.put("hourly rate ", newrate);
 
         String encodedImage = preferenceManager.getString("image");
         if (encodedImage != null && !encodedImage.isEmpty()) {

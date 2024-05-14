@@ -120,7 +120,7 @@ public class MainActivity2 extends AppCompatActivity {
                                     // You can upload the encoded image to Firestore here
 
                                     preferenceManager.putString("image",encodedImage);
-                                    preferenceManager.putString("hourly rate",hrate1);
+                                    preferenceManager.putString("hourly rate ",hrate1);
 
                                     preferenceManager.putString("skills",Skills);
 

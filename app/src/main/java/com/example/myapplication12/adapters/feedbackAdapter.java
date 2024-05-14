@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.example.myapplication12.submit_feedback;
 import com.example.myapplication12.utilities.androidutil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 // feedback adapter
 
@@ -37,18 +39,34 @@ public class feedbackAdapter extends FirestoreRecyclerAdapter<UserModel,feedback
         super(options);
         this.context=context;
     }
-// onbindView holder
     @Override
     protected void onBindViewHolder(@NonNull usermodelviewholder holder, int position, @NonNull UserModel model) {
         FirebaseFirestore.getInstance().collection("Login_Details")
                 .document(model.getEmail())
                 .get().addOnCompleteListener(innerTask -> {
-                    String encodedImage = innerTask.getResult().getString("image");
-                    if (encodedImage != null && !encodedImage.isEmpty()) {
-                        Bitmap decodedBitmap = decodeImage(encodedImage);
-                        Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
-                        holder.img.setImageBitmap(circularBitmap);
+                    if (innerTask.isSuccessful() && innerTask.getResult() != null) {
+
+                        DocumentSnapshot document = innerTask.getResult();
+                        String hourlyRate = document.getString("hourly rate ");
+
+                        String encodedImage = innerTask.getResult().getString("image");
+                        if (encodedImage != null && !encodedImage.isEmpty()) {
+                            Bitmap decodedBitmap = decodeImage(encodedImage);
+                            Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
+                            holder.img.setImageBitmap(circularBitmap);
+                        }
+                        if (hourlyRate != null) {
+                            holder.hourly_rate.setText("Hourly Rate: $" + hourlyRate);
+                        } else {
+                            holder.hourly_rate.setText("Hourly Rate not added!");
+                        }
+
                     }
+                    else{
+                        Log.e("FirestoreError", "Error fetching document: ", innerTask.getException());
+                        holder.hourly_rate.setText("Error fetching hourly rate.");
+                    }
+
                 });
         holder.usertext.setText(model.getEmail() != null ? model.getEmail() : "Unknown Email");
         holder.phonetext.setText(model.getSkills()!=null? model.getSkills(): "skills not specified!");
@@ -84,15 +102,18 @@ public class feedbackAdapter extends FirestoreRecyclerAdapter<UserModel,feedback
     class usermodelviewholder extends RecyclerView.ViewHolder {
         TextView usertext;
         TextView phonetext;
+        TextView hourly_rate;
+
         ImageView img;
 
 
         public usermodelviewholder(@NonNull View itemView) {
-
             super(itemView);
             usertext = itemView.findViewById(R.id.user_email);
             phonetext = itemView.findViewById(R.id.user_num);
             img = itemView.findViewById(R.id.profile_img);
+            hourly_rate = itemView.findViewById(R.id.hourly_rate);
+
 
         }
     }
