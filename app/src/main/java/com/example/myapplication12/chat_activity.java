@@ -138,6 +138,41 @@ String email;
         setupchatrecyclerview();
     }
     private void issue_resolved(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Login_Details")
+                .document(email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        // Retrieve the 'coins' field as a String
+                        String getCoins = task.getResult().getString("coins");
+
+                        // Check if 'coins' is not null
+                        if (getCoins != null) {
+                            try {
+                                // Convert 'coins' from String to Integer
+                                int currentCoins = Integer.parseInt(getCoins);
+
+                                // Subtract 10 coins
+                                int updatedCoins = currentCoins - 10;
+
+                                // Update the document with the new coin value
+                                db.collection("Login_Details")
+                                        .document(email)
+                                        .update("coins", String.valueOf(updatedCoins))
+                                        .addOnSuccessListener(aVoid -> System.out.println("Coins updated successfully!"))
+                                        .addOnFailureListener(e -> System.err.println("Error updating coins: " + e.getMessage()));
+                            } catch (NumberFormatException e) {
+                                System.err.println("Error parsing coins: " + e.getMessage());
+                            }
+                        } else {
+                            System.out.println("Coins field is missing or null.");
+                        }
+                    } else {
+                        System.err.println("Error fetching document: " + (task.getException() != null ? task.getException().getMessage() : "Unknown error"));
+                    }
+                });
+
         Intent intent = new Intent(chat_activity.this,Feedback.class);
         startActivity(intent);
     }

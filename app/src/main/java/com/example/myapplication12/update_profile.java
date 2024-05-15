@@ -39,7 +39,8 @@ public class update_profile extends AppCompatActivity {
     UserModel currentUserModel;
     private FirebaseAuth mAuth;
     String email2;
-    String Expertise, newrate;
+    String Expertise, newrate,coins;
+    EditText coins1;
     PreferenceManager preferenceManager;
 
     @Override
@@ -53,6 +54,7 @@ public class update_profile extends AppCompatActivity {
 
         hrateUpdated = findViewById(R.id.updatehrate);
         profilePic = findViewById(R.id.profile_image_view);
+        coins1=findViewById(R.id.coins_view);
         expertise = findViewById(R.id.profile_expertise);
         updateProfileBtn = findViewById(R.id.profle_update_btn_new);
         changePictureBtn = findViewById(R.id.button_change_pictureB);
@@ -93,6 +95,8 @@ public class update_profile extends AppCompatActivity {
                                 Bitmap circularBitmap = getCircularBitmap(decodedBitmap);
                                 profilePic.setImageBitmap(circularBitmap);
                             }
+                            coins=task.getResult().getString("coins");
+                            coins1.setText(coins);
                         }
                     }
                 });

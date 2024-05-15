@@ -158,6 +158,8 @@ public class MainActivity2 extends AppCompatActivity {
                 docData.put("Rating","Rating:0.0");
                 docData.put("userId","");
                 docData.put("hourly rate ",hrate1);
+//                coins initially by def are 50
+                docData.put("coins","50");
 
                 db.collection("Login_Details")
                         .document(email).set(docData).addOnCompleteListener(task -> {
